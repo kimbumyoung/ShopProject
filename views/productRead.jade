@@ -1,0 +1,137 @@
+extends layout
+
+block content
+    .row
+      hr
+      .row#head(style={padding:'40px'})
+        .col-sm-6
+            img(src='/images/'+rows[0].mainimage, style={height:'50%'})
+        .col-sm-6
+            .row
+              h4=rows[0].productname
+              br
+              p(style="color:#666666")=rows[0].content
+              br
+              hr
+            .row
+              .col-sm-2  
+                br
+                p 가격
+                br
+                p 색상
+                br
+                p 사이즈
+                
+              .col-sm-10
+                br
+                p#price=rows[0].price
+                br
+                p
+                  select#color(style={width:'200px'})
+                    option(value='null')옵션선택
+                    -for colorarray in color 
+                      option(value=colorarray)=colorarray
+                br  
+                p 
+                  select#size(style={width:'200px'})
+                    option(value='null')옵션선택
+                    option(value='S') S
+                    option(value="M") M
+                    option(value="L") L
+                br
+            hr
+            .row
+                .col-sm-8
+                    label 선택항목 : 
+                    label#colorField ?
+                    label ,  
+                    label#sizeField ?
+                .col-sm-4
+                    label 수량 : 
+                    input(type="text", id="productCount", value ="0",style={width:'30px'}).text-center
+                    a(href="#" id="increaseCount")
+                      span.glyphicon.glyphicon-chevron-up
+                    a(href="#" id="decreaseCount")
+                      span.glyphicon.glyphicon-chevron-down
+            hr
+            .row
+              .col-sm-8
+              .col-sm-4
+                  label 총 상품 금액 
+                  label#priceField 0 
+                  label 원  
+            hr
+            .row(style={height:'50px'})
+              .col-sm-4(style={height:'100%'})
+                button(type="submit",style={width:'100%',height:'100%',color:'white',background:'black'} ) BUY NOW
+              .col-sm-4(style={height:'100%'})
+                button(type="submit",style={width:'100%',height:'100%',background:'white'}  ) ADD TO CART
+              .col-sm-4(style={height:'100%'})
+                button(type="submit",style={width:'100%',height:'100%',background:'white'}  ) WISH LIST
+      hr
+      hr
+      .row#content(style={padding:'40px'}) 
+        .row
+          ul.nav.nav-tabs.nav-justified(style={width:'100%'})
+            li(style={width:'25%'})
+              a(href="#") DETAIL
+            li(style={width:'35%'})
+              a(href="#") DELIVERY/EXCHANGE/RETURN
+            li(style={width:'25%'})
+              a(href="#") REVIEW
+            li(style={width:'25%'})
+              a(href="#") Q&A    
+          .row(style={padding:'100px'})
+              img(src='/images/'+rows[0].mainimage, style={width:'100%'})
+            
+            
+          
+      script.
+           $(document).ready(function(){
+             var colorValue ='null';
+             var sizeValue='null';
+           
+              $('#color').change(function(){
+                colorValue = $('#color').val();
+                sizeValue= $('#size').val();
+                if(sizeValue != 'null' && colorValue != 'null'){
+                    $('#colorField').text(colorValue);
+                    $('#sizeField').text(sizeValue);
+                }
+              });
+              $('#size').change(function(){
+              colorValue = $('#color').val();
+              sizeValue= $('#size').val();
+                if(sizeValue != 'null' && colorValue != 'null'){-8
+                    $('#colorField').text(colorValue);
+                    $('#sizeField').text(sizeValue);
+                }
+              });
+              
+              $('#increaseCount').click(function(event){
+                var count =  $('#productCount').val();
+                var price = $('#price').text();
+                
+                count = parseInt(count,10)+1;
+                 $('#productCount').val(count);
+                price = parseInt(count,10)*parseInt(price,10);
+                 $('#priceField').text(price);
+              });
+              $('#decreaseCount').click(function(event){
+                var count =  $('#productCount').val();
+                var price = $('#price').text();
+                
+                if(count>0){
+                  console.log(count);
+                  count = parseInt(count,10)-1;
+                  $('#productCount').val(count);
+                  price = parseInt(count,10)*parseInt(price,10);
+                  $('#priceField').text(price);
+                }
+                
+              });
+              
+           });
+   
+      
+          

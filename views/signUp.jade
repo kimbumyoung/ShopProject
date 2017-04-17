@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-sm-4
+        div
+      .col-sm-4
+        p MEMBER SIGNUP
+      .col-sm-4
+        div
+    .row
+      .col-sm-2
+      .col-sm-8
+        .row
+          .col-sm-5
+            .row
+            form(action="/local/signUp" method="post")
+              input(type="text" name="username" placeholder="아이디")
+              input(type="text" name="password" placeholder="비밀번호")
+              input(type="text",name="displayname" placeholder="이름")
+              input(type="submit" value="SIGNUP" )
+          .col-sm-2
+          .col-sm-5
+            .row
+              p -회원가입을 하시면 더 많은 혜택을
+              a(href="/signUp") JOIN US
+              p -아이디 또는 비밀번호를 잊어버렸나요!
+              a(href="/") ID/PW SEARCH
+
+      .col-sm-2

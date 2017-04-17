@@ -1,0 +1,54 @@
+extends admin_layout
+
+
+block content
+  form(method="post", action="/admin/add_product" , enctype="multipart/form-data")
+    input(type="text",name="productname" placeholder="상품명")
+    input(type="text",name="content", placeholder="상품설명(10자)")
+    input(type='file', name='mainimage' , id='mainimage')
+  
+    div
+      .panel.panel-warning
+        .panel-heading
+          h4 색상 선택
+        .list-group
+          .list-group-item
+            label
+              input#Black(name='color', type='checkbox', value='black')
+              |  검은색
+          .list-group-item
+            label
+              input#brown(name='color', type='checkbox', value='brown')
+              |  브라운
+          .list-group-item
+            label
+              input#red(name='color', type='checkbox', value='red')
+              |  빨간색
+          .list-group-item
+            label
+              input#green(name='color', type='checkbox', value='green')
+              |  초록색
+    input(type="text",name="price",placeholder="판매가격")
+    input(type='file', name="mainimage")
+  
+  
+    select(name='category')
+      option(value='t-shirt') 티셔츠
+      option(value='pants') 바지
+    br
+      
+    input(type="submit" value="전송")
+    //- button#submitBtn.btn.btn-primary(type='button', style='width:50%') 등록
+    
+    //- script.
+    //-    $(document).ready(function(){
+    //-       
+    //-       $("#submitBtn").on("click",function(event){
+    //-       var a= $("#mainimage").attr('src');
+    //-           console.log(a);
+    //-       });
+    //-       
+    //-    });
+
+
+    

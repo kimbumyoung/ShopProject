@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    .row
+      .row.carousel-holder
+        .col-md-12
+          #carousel-example-generic.carousel.slide(data-ride='carousel')
+            ol.carousel-indicators
+              li.active(data-target='#carousel-example-generic', data-slide-to='0')
+              li(data-target='#carousel-example-generic', data-slide-to='1')
+              li(data-target='#carousel-example-generic', data-slide-to='2')
+            .carousel-inner
+              .item.active
+                img.slide-image(src='http://placehold.it/800x300', alt='')
+              .item
+                img.slide-image(src='http://placehold.it/800x300', alt='')
+              .item
+                img.slide-image(src='http://placehold.it/800x300', alt='')
+            a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
+              span.glyphicon.glyphicon-chevron-left
+            a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
+              span.glyphicon.glyphicon-chevron-right
+      .row
+        .col-sm-4
+        .col-sm-4.text-center
+          hr
+          p FACEBOOK BEST CODI
+          hr
+        .col-sm-4
+      .row
+      .row
+      .row
+        .col-sm-4
+        .col-sm-4.text-center
+          hr
+          p BEST ITEM
+          hr
+        .col-sm-4
+
+      - for productList in rows
+        .col-md-3.col-sm-6
+          span.thumbnail
+            a(href='/product/read?pno='+ productList.pno)
+              img(src='images/'+productList.mainimage, style={height:'50%'})
+            h4=productList.productname
+            hr 
+            p=productList.content
+            hr.line
+            label=productList.price
+            label 원
