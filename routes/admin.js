@@ -25,8 +25,7 @@ module.exports = function(app,conn){
   router.post('/add_product',upload.array('mainimage'),function(req,res){
     //upload.single('avatar') middleware 사용자가 전송한 데이터에서 파일이 있으면 req에 파일 property 암시적 추가
     //jade에서 보낸 input file에 name을 적어줘야한다 upload.single('파일 name값');
-
-    var color = req.body.color.join(',');
+    var color = req.body.color.join(','); // , split
     var product = {
       productname : req.body.productname,
       content : req.body.content,
@@ -54,6 +53,17 @@ module.exports = function(app,conn){
     console.log(req.files[0]);
   });
 
+  router.get('/add_productlist',function(req,res){
+    var sql = 'select *from products';
+
+
+    conn.query(sql,function(err,rows){
+        console.log(rows);
+        res.render('admin_productlist',{rows:rows});
+
+    });
+
+  });
 
   return router;
 
