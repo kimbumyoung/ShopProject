@@ -1,4 +1,37 @@
 extends admin_layout
 block content
-    img(src="/images/11.png")
+    h1 상품리스트 
+    .row
+      for productList in rows
+        .row(style={border:'1px solid black'})
+          .col-sm-6
+            .row
+              .col-sm-3
+                br
+                br
+                br  
+                br
+                input(type="radio", name="check_product", value=productList.pno)
+              .col-sm-9
+                img(src="/images/"+productList.mainimage,style={width:'60%'})
+          .col-sm-6
+            .row
+              label 
+                =productList.productname
+            .row  
+              label
+                가격: 
+                =productList.price
+      button(type="submit", id="submit" ) 판매 등록        
       
+      script.
+         $(document).ready(function(){
+            
+            $("#submit").on("click",function(event){
+              form.
+              form.setAttribute("method","post");                    
+              form.setAttribute("action","/etc/cs/view");     
+                  
+            });
+            
+         });
