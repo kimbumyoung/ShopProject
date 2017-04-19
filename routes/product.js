@@ -16,6 +16,10 @@ module.exports = function(conn){
 
   });
 
+  router.post('/cartAdd',function(req,res){
+      console.log(req.body.id);
+  });
+
   return router;
 
 };

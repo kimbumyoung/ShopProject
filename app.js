@@ -30,6 +30,18 @@ conn.connect();
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('*', function(req, res, next) {
+  if(req.user){
+    res.locals.session = req.user
+  }else{
+    res.locals.session = 'null';
+  }
+
+  console.dir(req.user);
+
+  next();
+});
+
 //routes
 var index = require('./routes/index')(conn);
 var users = require('./routes/users');
@@ -61,6 +73,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -33,6 +33,13 @@ module.exports = function (hasher,conn,session,passport){
     res.render('login');
   });
 
+  router.get("/logout",function(req,res){
+     req.logout();
+     req.session.save(function(){
+           res.redirect('/');
+     });
+  });
+
   // router.post("/login",function(req,res){
   //   if(req.session.user){
   //     res.send('Already Login user');

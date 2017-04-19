@@ -6,6 +6,7 @@ block content
       .row#head(style={padding:'40px'})
         .col-sm-6
             img(src='/images/'+rows[0].mainimage, style={height:'50%'})
+            input(type='hidden', name='country', value='#{session.username}')
         .col-sm-6
             .row
               h4=rows[0].productname
@@ -65,7 +66,7 @@ block content
               .col-sm-4(style={height:'100%'})
                 button(type="submit",style={width:'100%',height:'100%',color:'white',background:'black'} ) BUY NOW
               .col-sm-4(style={height:'100%'})
-                button(type="submit",style={width:'100%',height:'100%',background:'white'}  ) ADD TO CART
+                button(type="submit",id="cartBtn",style={width:'100%',height:'100%',background:'white'}  ) ADD TO CART
               .col-sm-4(style={height:'100%'})
                 button(type="submit",style={width:'100%',height:'100%',background:'white'}  ) WISH LIST
       hr
@@ -90,8 +91,9 @@ block content
            $(document).ready(function(){
              var colorValue ='null';
              var sizeValue='null';
-           
+            
               $('#color').change(function(){
+                console.log($('#userId').val())
                 colorValue = $('#color').val();
                 sizeValue= $('#size').val();
                 if(sizeValue != 'null' && colorValue != 'null'){
@@ -102,7 +104,7 @@ block content
               $('#size').change(function(){
               colorValue = $('#color').val();
               sizeValue= $('#size').val();
-                if(sizeValue != 'null' && colorValue != 'null'){-8
+                if(sizeValue != 'null' && colorValue != 'null'){
                     $('#colorField').text(colorValue);
                     $('#sizeField').text(sizeValue);
                 }
@@ -129,6 +131,32 @@ block content
                   $('#priceField').text(price);
                 }
                 
+              });
+              
+              $('#cartBtn').click(function(event){
+                var count =  $('#productCount').val();
+                
+              if(sizeValue != 'null' && colorValue != 'null' && count>0){
+                  $.ajax({
+                    url:"/product/cartAdd", 
+                    type:"post",
+                     data:{
+                     id : 'test',
+                     pw : '1234'
+                     },
+                     dataType:"text",
+                    success : function(result) {
+                      console.log("교체성공");
+                      }
+                  });
+                  
+                  console.log('aa')
+              }else{
+                console.log('상품 옵션 및 수량을 선택 해주세요');
+                
+              }
+              
+              
               });
               
            });

@@ -6,7 +6,7 @@ module.exports = function(conn){
 
   /* GET home page. */
   router.get('/', function(req, res) {
-
+      console.log('222222222222222222'+req.session.user);
     var sql = 'select *from product_board b join products p on b.pno = p.pno';
     conn.query(sql,function(err,rows){
 
