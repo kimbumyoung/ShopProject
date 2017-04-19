@@ -35,9 +35,7 @@ module.exports = function(app,conn){
       contentimage : req.files[1].originalname,
       category : req.body.category
     };
-
     var sql = 'insert into products set ?';
-
     conn.query(sql,[product],function(err,rows){
       if(err){
         console.log(err);
@@ -45,23 +43,26 @@ module.exports = function(app,conn){
         console.log(rows);
     });
 
-
-
-
     console.log(product);
   //console.log(productname,content,mainimage,color,price,contentimage,category);
     console.log(req.files[0]);
   });
 
   router.get('/add_productlist',function(req,res){
-    var sql = 'select *from products';
-
+    var sql = 'select *from product_board b join products p on b.pno = p.pno';
 
     conn.query(sql,function(err,rows){
         console.log(rows);
         res.render('admin_productlist',{rows:rows});
-
     });
+router.post('/productlist',function(req,res){
+  var pno = req.body.pno;
+  var sql = 'insert into product_board (pno) values (?)';
+  conn.query(sql,[pno],function(err,rows){
+      console.log(rows);
+  });
+
+});
 
   });
 

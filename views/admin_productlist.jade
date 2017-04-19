@@ -26,12 +26,17 @@ block content
       
       script.
          $(document).ready(function(){
-            
+              var $form = $('<form></form>');
+                          
+              $form.attr("method","post");                    
+              $form.attr("action","/admin/productlist");     
+              $form.appendTo('body');
+
             $("#submit").on("click",function(event){
-              form.
-              form.setAttribute("method","post");                    
-              form.setAttribute("action","/etc/cs/view");     
-                  
-            });
+              var rvalue = $(':radio[name="check_product"]:checked').val();
+              var pno =  $("<input type='hidden' value="+rvalue+" name='pno'>");
+              $form.append(pno);
             
+              $form.submit();    
+            });
          });

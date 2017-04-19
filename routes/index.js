@@ -7,7 +7,7 @@ module.exports = function(conn){
   /* GET home page. */
   router.get('/', function(req, res) {
 
-    var sql = 'select *from products';
+    var sql = 'select *from product_board b join products p on b.pno = p.pno';
     conn.query(sql,function(err,rows){
 
       res.render('index',{rows:rows});

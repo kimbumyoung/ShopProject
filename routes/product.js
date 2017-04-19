@@ -3,8 +3,8 @@ module.exports = function(conn){
   var router = express.Router();
 
   router.get('/read',function(req,res){
-      var pno = req.param('pno');
-      var sql = 'select *from products where pno ='+ pno;
+      var pboardno = req.param('pboardno');
+      var sql = 'select *from product_board b join products p on b.pno = p.pno where pboardno =' + pboardno;
       conn.query(sql,function(err,rows){
           if(err){
             console.log(err);
@@ -13,8 +13,6 @@ module.exports = function(conn){
             res.render('productRead',{rows:rows,color:color});
           }
       });
-
-
 
   });
 

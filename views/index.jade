@@ -40,7 +40,7 @@ block content
       - for productList in rows
         .col-md-3.col-sm-6
           span.thumbnail
-            a(href='/product/read?pno='+ productList.pno)
+            a(href='/product/read?pboardno='+ productList.pboardno)
               img(src='images/'+productList.mainimage, style={height:'50%'})
             h4=productList.productname
             hr 
