@@ -13,8 +13,6 @@ module.exports = function(app,conn){
     }
   });
 
-
-
   var upload = multer({ storage: storage }); //_storage의 property와 함수를 실행
   /* GET home page. */
 

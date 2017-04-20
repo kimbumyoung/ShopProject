@@ -17,8 +17,28 @@ module.exports = function(conn){
   });
 
   router.post('/cartAdd',function(req,res){
-      console.log(req.body.id);
+    var cart = {
+      user_num : req.body.user_num,
+      pboardno : req.body.pboardno,
+      size : req.body.size,
+      color : req.body.color,
+      productCount :req.body.productCount,
+      price : req.body.price
+    };
+
+    var sql = 'insert into cart set ?'
+
+      conn.query(sql,cart,function(err,rows){
+        if(err){
+          console.log(err);
+        }else {
+            res.send('success');
+        }
+
+      });
+
   });
+
 
   return router;
 

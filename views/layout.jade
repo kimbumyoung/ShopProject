@@ -7,6 +7,17 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.js', integrity='sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=', crossorigin='anonymous')  
 
     style.  
+       #box{
+        position: absolute;
+        width: 500px;
+        height: 300px;
+        left: 50%;
+        top: 50%;
+        margin-top: -250px;
+        border: 1px solid black;
+        background: white;
+        z-index: 3;
+       }
        .container {
        border : 1px solid black;
        margin : 0px;
@@ -40,7 +51,7 @@ html
        #rightTap{
           margin:0px;
        }
-
+    
   body
     #main_container.row
       #leftTap.col-sm-3

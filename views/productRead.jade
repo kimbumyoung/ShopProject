@@ -6,7 +6,31 @@ block content
       .row#head(style={padding:'40px'})
         .col-sm-6
             img(src='/images/'+rows[0].mainimage, style={height:'50%'})
-            input(type='hidden', name='country', value='#{session.username}')
+            input(type='hidden',id='user_num', value='#{session.user_num}')
+            input(type='hidden',id='pboardno', value=rows[0].pboardno)
+            div(id='box',style={padding:'5px'})
+                p(id='boxheader',style={background:'gray', height:'40px'})
+                  label 
+                    장바구니 보기 
+                hr(style={border:'2px solid gray'})
+                p(id='boxcontent')
+                  p.text-center 
+                    label
+                     =rows[0].productname
+                  p.text-center 
+                    label
+                      상품이 장바구니에 담겼습니다 
+                  p.text-center
+                    label 
+                      지금 확인 하시겠습니까?
+                hr(style={border:'2px solid gray'})
+                .row.text-center
+                  .col-sm-3
+                  .col-sm-6
+                    button(type="submit",style:{width:'60px'}) 예
+                    button(type="submit",style:{width:'50%'}) 계속쇼핑
+                  .col-sm-3  
+                  
         .col-sm-6
             .row
               h4=rows[0].productname
@@ -93,7 +117,6 @@ block content
              var sizeValue='null';
             
               $('#color').change(function(){
-                console.log($('#userId').val())
                 colorValue = $('#color').val();
                 sizeValue= $('#size').val();
                 if(sizeValue != 'null' && colorValue != 'null'){
@@ -141,16 +164,26 @@ block content
                     url:"/product/cartAdd", 
                     type:"post",
                      data:{
-                     id : 'test',
-                     pw : '1234'
+                      user_num : $('#user_num').val(),
+                      pboardno : $('#pboardno').val(),
+                      size : sizeValue,
+                      color : colorValue,
+                      productCount : count,
+                      price : $('#priceField').text()
                      },
                      dataType:"text",
                     success : function(result) {
-                      console.log("교체성공");
+                          if(result){
+                            var windowW = 500;  // 창의 가로 길이
+                            var windowH = 500;  // 창의 세로 길이
+                            var left = Math.ceil((window.screen.width - windowW)/2);
+                            var top = Math.ceil((window.screen.height - windowH)/2);
+                      window.open("/open_window.html","pop_01","l top="+top+", left="+left+", height="+windowH+", width="+windowW);
+
+                          }
                       }
                   });
                   
-                  console.log('aa')
               }else{
                 console.log('상품 옵션 및 수량을 선택 해주세요');
                 
