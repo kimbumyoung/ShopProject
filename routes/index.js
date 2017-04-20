@@ -23,5 +23,6 @@ module.exports = function(conn){
     res.render('admin_index');
   });
 
+
   return router;
 };

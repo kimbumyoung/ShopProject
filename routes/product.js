@@ -26,7 +26,7 @@ module.exports = function(conn){
       price : req.body.price
     };
 
-    var sql = 'insert into cart set ?'
+    var sql = 'insert into cart set ?';
 
       conn.query(sql,cart,function(err,rows){
         if(err){

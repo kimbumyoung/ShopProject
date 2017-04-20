@@ -32,7 +32,7 @@ app.use(passport.session());
 
 app.get('*', function(req, res, next) {
   if(req.user){
-    res.locals.session = req.user
+    res.locals.session = req.user;
   }else{
     res.locals.session = 'null';
   }
@@ -44,7 +44,7 @@ app.get('*', function(req, res, next) {
 
 //routes
 var index = require('./routes/index')(conn);
-var users = require('./routes/users');
+var users = require('./routes/users')(conn);
 var login = require('./routes/local_login')(hasher,conn,session,passport);
 var admin = require('./routes/admin')(app,conn);
 var product = require('./routes/product')(conn);
@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/p',express.static('image'));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', users);
 app.use('/local', login);
 app.use('/admin',admin);
 app.use('/product',product);

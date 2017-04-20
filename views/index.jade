@@ -2,24 +2,28 @@ extends layout
 
 block content
     .row
-      .row.carousel-holder
-        .col-md-12
-          #carousel-example-generic.carousel.slide(data-ride='carousel')
-            ol.carousel-indicators
-              li.active(data-target='#carousel-example-generic', data-slide-to='0')
-              li(data-target='#carousel-example-generic', data-slide-to='1')
-              li(data-target='#carousel-example-generic', data-slide-to='2')
-            .carousel-inner
-              .item.active
-                img.slide-image(src='http://placehold.it/800x300', alt='')
-              .item
-                img.slide-image(src='http://placehold.it/800x300', alt='')
-              .item
-                img.slide-image(src='http://placehold.it/800x300', alt='')
-            a.left.carousel-control(href='#carousel-example-generic', data-slide='prev')
-              span.glyphicon.glyphicon-chevron-left
-            a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
-              span.glyphicon.glyphicon-chevron-right
+      #carousel-example-generic.carousel.slide(data-ride='carousel')
+        ol.carousel-indicators
+          li.active(data-target='#carousel-example-generic', data-slide-to='0')
+          li(data-target='#carousel-example-generic', data-slide-to='1')
+          li(data-target='#carousel-example-generic', data-slide-to='2')
+        .carousel-inner(role='listbox')
+          .item.active
+            img(src='/images/11.png', alt='...')
+            .carousel-caption
+              | ...
+          .item
+            img(src='/images/11.png', alt='...')
+            .carousel-caption
+              | ...
+          |     ...
+        a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+          span.sr-only Previous
+        a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+          span.sr-only Next
+
       .row
         .col-sm-4
         .col-sm-4.text-center

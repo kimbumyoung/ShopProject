@@ -1,0 +1,77 @@
+extends layout
+
+block content
+  br
+  br
+  br
+  br
+  br
+  h1 shopping cart
+  hr(style={border:'2px solid black'})
+  .row
+    .col-sm-1.text-center 
+      label 번호
+    .col-sm-3.text-center 
+      label 사진
+    .col-sm-4.text-center 
+      label 제품명
+    .col-sm-1.text-center 
+      label 수량
+    .col-sm-1.text-center 
+      label 가격
+    .col-sm-1.text-center 
+      label 배송비
+    .col-sm-1.text-center 
+      label 취소
+  hr(style={border:'2px solid gray'})
+  each list, i in rows
+    .row
+      .col-sm-1.text-center 
+        label=i
+      .col-sm-3
+        .row.text-center 
+          img(src="/images/"+list.mainimage,style={width:'80%',height:'100px'})
+        br
+        .row
+        span.glyphicon.glyphicon-play 
+        span.label.label-warning
+          옵션
+        label
+          색상:
+        label=list.color
+        label ,사이즈
+        label=list.size
+      .col-sm-4.text-center 
+        label=list.productname
+      .col-sm-1.text-center 
+        label=list.productcount
+      .col-sm-1.text-center 
+        label=list.price
+        label 원
+      .col-sm-1.text-center 
+        label [기본배송]
+      .col-sm-1.text-center 
+        button(type="submit",value=list.cartno).btn.btn-default 삭제
+    br
+    hr(style={border:'1px dotted black'}) 
+  .row
+    .col-sm-8
+    .col-sm-4
+      label 총 구매 금액:
+      label 0원
+      label + 배송료 2,500원 = 
+      label 2500원
+  hr(style={border:'2px solid gray'})
+  br
+  br    
+  .row.text-center
+    label 100,000원 미만의 주문은 배송료를 청구합니다.    
+  br
+  br
+  .row.text-center
+    button(type="submit",style={width:'15%',height:'50px'}).btn.btn-default 주문하기
+    button(type="submit",style={width:'15%',height:'50px'}).btn.btn-default 계속쇼핑
+    button(type="submit",style={width:'15%',height:'50px'}).btn.btn-default 비우기
+  br
+  br
+  br
