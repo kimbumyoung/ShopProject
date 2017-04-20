@@ -5,10 +5,11 @@ block content
       hr
       .row#head(style={padding:'40px'})
         .col-sm-6
-            img(src='/images/'+rows[0].mainimage, style={height:'50%'})
+            img(src='/images/'+rows[0].mainimage, style={height:'700px',width:'100%'})
             input(type='hidden',id='user_num', value='#{session.user_num}')
             input(type='hidden',id='pboardno', value=rows[0].pboardno)
-            div(id='box',style={padding:'5px'})
+              
+            div(id='box',style={padding:'5px',display:'none'})
                 p(id='boxheader',style={background:'gray', height:'40px'})
                   label 
                     장바구니 보기 
@@ -26,10 +27,17 @@ block content
                 hr(style={border:'2px solid gray'})
                 .row.text-center
                   .col-sm-3
-                  .col-sm-6
-                    button(type="submit",style:{width:'60px'}) 예
-                    button(type="submit",style:{width:'50%'}) 계속쇼핑
+                  .col-sm-3
+                    a(href="",id="cartShow",style={width:'100%'})
+                      div(style={background:'black',color:'white',border:'1px solid gray'})
+                        span.glyphicon.glyphicon-chevron-right
+                        label 예
+                  .col-sm-3      
+                    a(href="",id="cartCancle",style={width:'100%'})
+                      div(style={background:'black',color:'white',border:'1px solid gray'})  
+                        label 계속쇼핑
                   .col-sm-3  
+                  
                   
         .col-sm-6
             .row
@@ -158,11 +166,10 @@ block content
               
               $('#cartBtn').click(function(event){
                 var count =  $('#productCount').val();
-                
               if(sizeValue != 'null' && colorValue != 'null' && count>0){
                   $.ajax({
-                    url:"/product/cartAdd", 
-                    type:"post",
+                     url:"/product/cartAdd", 
+                     type:"post",
                      data:{
                       user_num : $('#user_num').val(),
                       pboardno : $('#pboardno').val(),
@@ -174,24 +181,22 @@ block content
                      dataType:"text",
                     success : function(result) {
                           if(result){
-                            var windowW = 500;  // 창의 가로 길이
-                            var windowH = 500;  // 창의 세로 길이
-                            var left = Math.ceil((window.screen.width - windowW)/2);
-                            var top = Math.ceil((window.screen.height - windowH)/2);
-                      window.open("/open_window.html","pop_01","l top="+top+", left="+left+", height="+windowH+", width="+windowW);
-
-                          }
-                      }
-                  });
-                  
+                              $('#box').css("display","block"); 
+                            }
+                  }});
               }else{
                 console.log('상품 옵션 및 수량을 선택 해주세요');
-                
               }
-              
-              
               });
               
+              $('#cartShow').click(function(event){
+                  event.preventDefault();
+                  console.log('show');
+              });
+              $('#cartCancle').click(function(event){
+                  event.preventDefault();
+                  $('#box').css("display","none"); 
+              });
            });
    
       

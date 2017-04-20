@@ -11,7 +11,6 @@ module.exports = function (hasher,conn,session,passport){
   var LocalStrategy = require('passport-local').Strategy;
   var router = express.Router();
 
-
   passport.serializeUser(function(user, done) {
     console.log(user.username);
     done(null, user.username);

@@ -22,10 +22,6 @@ html
        border : 1px solid black;
        margin : 0px;
        }
-       .row {
-        border : 0px solid red;
-        padding : 0px;
-       }
       
        input{
         margin-bottom : 5px;
@@ -40,7 +36,7 @@ html
           padding : 0px;
        }
        #leftTap{
-           padding: 40px;
+           padding: 50px;
            background-color: #353535;
            height: 100%;
            color: white;
@@ -71,7 +67,15 @@ html
           .col-sm-3
             a(href= '/myPage') MYPAGE
         .row
-          input(type="text" name="search")
+          br
+          a(href="")
+            img(src="http://hehekuk.img6.kr/wizdesign/cart1.png", alt="")
+            label CART
+          br
+          br
+        .row
+          input(type="text",name="search",style={width:'80%'})
+          img(src="http://hehekuk.img6.kr/wizdesign/btn.png",style={width:'10%'})
         .row
           p CATEGORY
         .row
