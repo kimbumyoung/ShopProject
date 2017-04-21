@@ -47,12 +47,14 @@ module.exports = function(app,conn){
   });
 
   router.get('/add_productlist',function(req,res){
-    var sql = 'select *from product_board b join products p on b.pno = p.pno';
+    var sql = 'select *from products';
 
     conn.query(sql,function(err,rows){
         console.log(rows);
         res.render('admin_productlist',{rows:rows});
     });
+  });
+
 router.post('/productlist',function(req,res){
   var pno = req.body.pno;
   var sql = 'insert into product_board (pno) values (?)';
@@ -62,7 +64,6 @@ router.post('/productlist',function(req,res){
 
 });
 
-  });
 
   return router;
 
