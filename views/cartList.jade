@@ -25,7 +25,7 @@ block content
       label 취소
   hr(style={border:'2px solid gray'})
   each list, i in rows
-    .row
+    #listrows.row
       .col-sm-1.text-center 
         label=i
       .col-sm-3
@@ -53,7 +53,6 @@ block content
       .col-sm-1.text-center 
         button(type="submit",value=list.cartno).btn.btn-default 삭제
     br
-    hr(style={border:'1px dotted black'}) 
   .row
     .col-sm-8
     .col-sm-4

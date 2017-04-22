@@ -5,7 +5,8 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
     script(src='https://code.jquery.com/jquery-3.2.1.js', integrity='sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=', crossorigin='anonymous')  
-
+    script(src='http://dmaps.daum.net/map_js_init/postcode.v2.js')
+    
     style.  
        #box{
         position: absolute;
@@ -47,7 +48,30 @@ html
        #rightTap{
           margin:0px;
        }
-    
+       #listrows{
+          border-bottom: 1px dotted black;
+       }
+       th{
+          background-color : #ededed;
+       }
+       ul{
+          padding : 0px;
+          margin : 0px;
+          list-style:none;
+       }
+       #trhead{
+          border-top : 1px solid #b7b7b7;
+       }
+       .cuponBox{
+          border-top : 1px solid #b7b7b7;
+          border-bottom : 1px solid #b7b7b7;
+          padding-top : 10px;
+          padding-bottom : 10px;
+       }
+       .cuponinput{
+          border-right : 1px solid #b7b7b7; 
+       }
+       
   body
     #main_container.row
       #leftTap.col-sm-3
@@ -63,19 +87,19 @@ html
           .col-sm-3
             a(href= '/local/signUp') SIGN UP
           .col-sm-3
-            a(href= '/order') ORDER
+            a(href= '/user/order') ORDER
           .col-sm-3
             a(href= '/myPage') MYPAGE
         .row
           br
           a(href="/user/cartList")
-            img(src="http://hehekuk.img6.kr/wizdesign/cart1.png", alt="")
+            //- img(src="http://hehekuk.img6.kr/wizdesign/cart1.png", alt="")
             label CART
           br
           br
         .row
           input(type="text",name="search",style={width:'80%'})
-          img(src="http://hehekuk.img6.kr/wizdesign/btn.png",style={width:'10%'})
+          //- img(src="http://hehekuk.img6.kr/wizdesign/btn.png",style={width:'10%'})
         .row
           p CATEGORY
         .row

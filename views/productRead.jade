@@ -178,6 +178,8 @@ block content
               
               $('#cartShow').click(function(event){
                   event.preventDefault();
+                  var link = '/user/cartList'
+                  $(location).attr('href', link);
               });
               
               $('#cartCancle').click(function(event){
