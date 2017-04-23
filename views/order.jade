@@ -43,20 +43,23 @@ block content
           label 원
         .col-sm-1.text-center 
           label [기본배송]
+          input(type="hidden",value=list.pno,name="pnoArray")
       br  
     .row
       .col-sm-8
       .col-sm-4
         label 총 구매 금액:
-        label 0원
-        label + 배송료 2,500원 = 
-        label 2500원
+        label#sumPrice
+          =totalPrice[0].price
+        label 원 + 배송료 2,500원 = 
+        label#totalPrice(style={color:'red'})
+          
     hr(style={border:'2px solid #b7b7b7'})
     .row(style={background:'#ededed'})
       br
       .col-sm-3
       .col-sm-6
-        label #{session.displayname} 
+        label #{session.displayname}
         label 님은 
         label(style={color:'red'}) [kun]
         label 회원입니다.
@@ -69,47 +72,67 @@ block content
         table.table.table-bordered
           #trhead.tr
             th 이름
-            td(colspan=3) 김범영
+            td(colspan=3)
+              label#shopperName #{session.displayname}
           tr
             th E-mail
-            td qjadud22@naver.com
+            td
+              label#shopperEmail qjadud22@naver.com
             th 연락처
-            td 01076705549
+            td
+              label#shopperPhoneNumber 010-7670-5549
     .row(style={padding:'12px'})
       .row
         .col-sm-1(style={padding:'0px'})
           label 배송지 정보
         .col-sm-8
         .col-sm-3
-          input(type="checkbox" name="checkbox",style={width:'10%'})
+          input(type="checkbox" id="contentCheckbox",style={width:'10%'})
           label 주문자 정보 입력
           
       .row
         table.table.table-bordered
           #trhead.tr
             th 이름
-            td 김범영
+            td 
+              input(type="text",id="orderName",style={width:'50%'})
+            th 이메일
+            td 
+              input(type="text",id="orderEmail1",style={width:'40%'})
+              label @
+              input(type="text",id="orderEmail2",style={width:'40%'})
             th 연락처
-            td 01076705549
+            td
+              input(type="text",id="orderPhone1",style={width:'10%'})
+              label -
+              input(type="text",id="orderPhone2",style={width:'10%'})
+              label -
+              input(type="text",id="orderPhone3",style={width:'10%'})
           tr
             th 주소
-            td(colspan=3)
+            td(colspan=5)
               ul
                 li
                   input(type="radio", name="address",style={width:'1%'})
-                  |자택
+                  label 자택
                   input(type="radio", name="address",style={width:'1%'})
-                  |회사
+                  label 회사
                   input(type="radio", name="address",style={width:'1%'})
-                  |최근배송지
+                  label 최근배송지
+                li
+                  input#sample6_postcode(type='text', placeholder='우편번호',style={width:'10%'})
+                  input#postBtn(type='button', value='우편번호 검색',style={width:'10%'})
                 li 
+                  input#sample6_address(type='text', placeholder='주소',style={width:'40%'})
+                  label [기본주소]
                   br
-                li 
+                  input#sample6_address2(type='text', placeholder='상세주소',style={width:'40%'})
+                  label [상세주소] 
                   br
           #trbottomtr 
             th 주문메세지
-            td(colspan=3) 
-              textarea(rows='4',cols='100')
+            td(colspan=5) 
+              textarea#orderMessage(rows='4',cols='100')
       .row(style={padding:'12px'})
         .row 
           label 쿠폰 사용
@@ -121,60 +144,154 @@ block content
             label 보유하신 쿠폰을 적용하시면 할인 또는 추가적립 혜택을 받으실 수 있습니다.
       br
       .row.text-center
-        button(type="submit",style={width:'15%',height:'50px'}).btn.btn-default 주문하기
+        button(type="submit",id='buyBtn',style={width:'15%',height:'50px'}).btn.btn-default 주문하기
         button(type="submit",style={width:'15%',height:'50px'}).btn.btn-default 주문취소
-      .row
-        input#sample4_postcode(type='text', placeholder='우편번호')
-        input(type='button', onclick='sample4_execDaumPostcode()', value='우편번호 찾기')
-        input#sample4_roadAddress(type='text', placeholder='도로명주소')
-        input#sample4_jibunAddress(type='text', placeholder='지번주소')
-        span#guide(style='color:#999')
+        input(type="hidden",id='user_num' value="#{session.user_num}")
+        script.
+         $(document).ready(function(){
+            var sumPrice = parseInt($('#sumPrice').text(),10) + 2500; //상품 총 가격  + 배송비
+            $('#totalPrice').text(sumPrice+' 원');
+              
+              
+            $('#contentCheckbox').change(function(event){
+                var chk = $(this).is(":checked");
+                if(chk){
+                  var name = $('#shopperName').text();
+                  var email = $('#shopperEmail').text().split('@');
+                  var phonenumber = $('#shopperPhoneNumber').text().split('-');
+                  $('#orderName').val(name);
+                  $('#orderEmail1').val(email[0]);
+                  $('#orderEmail2').val(email[1]);
+                  $('#orderPhone1').val(phonenumber[0]);
+                  $('#orderPhone2').val(phonenumber[1]);
+                  $('#orderPhone3').val(phonenumber[2]);
+                }
+                else{
+                  $('#orderName').val('');
+                  $('#orderEmail1').val('');
+                  $('#orderEmail2').val('');
+                  $('#orderPhone1').val('');
+                  $('#orderPhone2').val('');
+                  $('#orderPhone3').val('');
+                }
+            });  
+              
+            $('#buyBtn').click(function(event){
+                var  successCheck = false;
+                var date = new Date();
+                var year = date.getYear()+1900;
+                var month = date.getMonth()+1;
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+                var sec = date.getSeconds();
+                var currentDate = year+"."+month+"."+day+"."+hour+"."+minute+"."+sec;
+                var pnoArray = $("input[name=pnoArray]");
+                var pno ='';
+                
+                //태그값 받기
+                var user_num = $('#user_num').val();
+                var orderName = $('#orderName').val();
+                var orderEmail = $('#orderEmail1').val() +'@'+ $('#orderEmail2').val();
+                var orderPhone = $('#orderPhone1').val() +'-'+ $('#orderPhone2').val()+'-'+ $('#orderPhone3').val();
+                var orderAddress = $('#sample6_postcode').val()+','+$('#sample6_address').val()+','+$('#sample6_address2').val();
+                var orderMessage =$('#orderMessage').val();
+                
+                console.log(orderPhone);
+                //pno 한줄로 생성
+                for(var i=0; i<pnoArray.length;i++){
+                  pno+=pnoArray.eq(i).val();
+                  if(i!=pnoArray.length-1){
+                    pno+=',';
+                  }
+                }
+                //orderDetail 등록
+                $.ajax({
+                   url:"/user/orderProductAdd", 
+                   type:"post",
+                   data:{
+                    orderDetailno : currentDate+"."+user_num,
+                    user_num : user_num,
+                    pno : pno
+                   },
+                   dataType:"text",
+                  success : function(result) {
+                        if(result){
+                        
+                            $.ajax({
+                               url:"/user/order", 
+                               type:"post",
+                               data:{
+                                 user_num : user_num,
+                                 orderName : orderName,
+                                 orderPhone : orderPhone,
+                                 orderEmail : orderEmail,
+                                 orderAddress : orderAddress,
+                                 orderDetailno : currentDate+"."+user_num,
+                                 orderMessage : orderMessage,
+                                 orderDetailno : currentDate+"."+$('#user_num').val(),
+                               },
+                               dataType:"text",
+                              success : function(result) {
+                                  if(result){
+                                    var link = '/user/orderComplete';
+                                    $(location).attr('href', link);
+                                  }
+                            }});
+                        }
+                }});
+                
+                });
+                
+                  $('#postBtn').click(function(event){
+                    sample6_execDaumPostcode();
+                  
+                  })
+                    //다음 우편번호 API
+                   function sample6_execDaumPostcode() {
+                   new daum.Postcode({
+                   oncomplete: function(data) {
+                   // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                   // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                   // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                   var fullAddr = ''; // 최종 주소 변수
+                   var extraAddr = ''; // 조합형 주소 변수
+                   // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                   if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                   fullAddr = data.roadAddress;
+                   } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                   fullAddr = data.jibunAddress;
+                   }
+                   // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                   if(data.userSelectedType === 'R'){
+                   //법정동명이 있을 경우 추가한다.
+                   if(data.bname !== ''){
+                   extraAddr += data.bname;
+                   }
+                   // 건물명이 있을 경우 추가한다.
+                   if(data.buildingName !== ''){
+                   extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                   }
+                   // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                   fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                   }
+                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                   document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                   document.getElementById('sample6_address').value = fullAddr;
+                   // 커서를 상세주소 필드로 이동한다.
+                   document.getElementById('sample6_address2').focus();
+                   }
+                   }).open();
+                   }
+                   
+              });  
+            
+              
+            
+      
           
-        
-        
-          script.
-            //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-            function sample4_execDaumPostcode() {
-            new daum.Postcode({
-            oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-            // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-            var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-            extraRoadAddr += data.bname;
-            }
-            // 건물명이 있고, 공동주택일 경우 추가한다.
-            if(data.buildingName !== '' && data.apartment === 'Y'){
-            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-            }
-            // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-            if(extraRoadAddr !== ''){
-            extraRoadAddr = ' (' + extraRoadAddr + ')';
-            }
-            // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-            if(fullRoadAddr !== ''){
-            fullRoadAddr += extraRoadAddr;
-            }
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-            document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-            document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
-            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            if(data.autoRoadAddress) {
-            //예상되는 도로명 주소에 조합형 주소를 추가한다.
-            var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-            document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-            } else if(data.autoJibunAddress) {
-            var expJibunAddr = data.autoJibunAddress;
-            document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-            } else {
-            document.getElementById('guide').innerHTML = '';
-            }
-            }
-            }).open();
-            }
-  
+          
+          
+              
+              
+                
