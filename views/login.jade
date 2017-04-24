@@ -1,12 +1,11 @@
 extends layout
 
 block content
-    .container
       .row
         .col-sm-4
           div
         .col-sm-4
-          p MEMBER LOGIN
+          p.text-center MEMBER LOGIN
         .col-sm-4
           div
       .row
@@ -16,16 +15,20 @@ block content
             .col-sm-5
               .row
               form(action="/local/login" method="post")
-                input(type="text" name="username" placeholder="아이디")
-                input(type="text" name="password" placeholder="비밀번호")
-                input(type="submit" value="LOGIN" )
+                input(type="text" name="username",placeholder="아이디").form-control
+                input(type="text" name="password" placeholder="비밀번호").form-control
+                br
+                input(type="submit" value="LOGIN",style={width:'100%',height:'70px',background:'white',color:'black',border:'2px solid black'} )
                 p 
                   =user
-            .col-sm-2
-            .col-sm-5
+            .col-sm-1
+            .col-sm-6
               .row
-                p -회원가입을 하시면 더 많은 혜택을
-                a(href="/local/signUp") JOIN US
-                p -아이디 또는 비밀번호를 잊어버렸나요!
-                a(href="/") ID/PW SEARCH
+                label -회원가입을 하시면 더 많은 혜택을 받으실 수 있습니다.
+                button(type="submit",style={width:'100%',height:'40px',background:'black',color:'white'}).btn.btn-default JOIN US
+              br
+              .row
+                label -아이디 또는 비밀번호를 잊어버렸나요!
+                button(type="submit",style={width:'100%',height:'40px',background:'black',color:'white'}).btn.btn-default ID/PW SEARCH
         .col-sm-2
+          
