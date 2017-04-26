@@ -29,7 +29,10 @@ block content
                   td 
                     label.signStar *
                     label.signHead 아이디
-                    input(type="text" name="username",style={width:'10%'})
+                    input(type="text" id="username" name="username",style={width:'10%'})
+                    button(type="submit",id="usernameCheckBtn", style={width:'80px ',height:'30px',background:'#6a6b6d',color:'white'}).btn.btn-default 중복확인
+                    label.checkId(style={display:'none'})
+                    
                 tr 
                   td 
                     label.signStar *
@@ -67,6 +70,28 @@ block content
                   $('#cancleBtn').click(function(){
                       console.log('cancle');
                   });
+                  $('#usernameCheckBtn').click(function(){
+                      $.ajax({
+                         url:"/local/usernameCheck", 
+                         type:"post",
+                         data:{
+                            username: $('#username').val()
+                         },
+                        dataType:"text",
+                        success : function(result) {
+                            console.log(result);
+                            if(result=='reject'){
+                            console.log('111');
+                                $('.checkId').val('ID가 중복되었습니다.');
+                                $('.checkId').css("diplay","block");
+                            }else{
+                            console.log(result);
+                                $('.checkId').val('사용 가능한 ID 입니다.')
+                                $('.checkId').css("diplay","block");
+                            }
+                      }});
+                  });
+            
               });
       
       

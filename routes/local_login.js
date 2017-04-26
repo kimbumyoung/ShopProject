@@ -39,36 +39,8 @@ module.exports = function (hasher,conn,session,passport){
      });
   });
 
-  // router.post("/login",function(req,res){
-  //   if(req.session.user){
-  //     res.send('Already Login user');
-  //   }else{
-  //     var username = req.body.username;
-  //     var password = req.body.password;
-  //     var sql = 'select *from users where username = ?';
-  //     conn.query(sql,[username],function(err,rows){
-  //       if(err){
-  //         console.log(err);
-  //       }else{
-  //         hasher({password:password,salt:rows[0].salt},function(err, pass, salt, hash){
-  //             if(hash === rows[0].password)
-  //             {
-  //                 req.session.user = username;
-  //                 res.redirect('/');
-  //             }else{
-  //                 res.redirect('/local/login');
-  //             }
-  //         });
-  //
-  //       }
-  //     });
-  //   }
-  // });
-
   router.get("/signUp",function(req,res){
-
       res.render('signUp');
-
   });
 
   router.post("/signUp",function(req,res){
@@ -96,8 +68,20 @@ module.exports = function (hasher,conn,session,passport){
       });
   });
 
+  router.post("/usernameCheck",function(req,res){
+      var username = req.body.username;
+      var sql = 'select count(*) as count from users where username = ?';
 
+      conn.query(sql,[username],function(err,rows){
 
+              if(rows[0].count>0){
+                  res.send('reject');
+              }else{
+                  res.send('permit');
+              }
+      });
+
+  });
 
   passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -125,22 +109,6 @@ module.exports = function (hasher,conn,session,passport){
                 }
               });
             }));
-
-        //     var password = req.body.password;
-        //     var sql = 'select *from users where username = ?';
-        //     conn.query(sql,[username],function(err,rows){
-        //       if(err){
-        //         console.log(err);
-        //       }else{
-        //         hasher({password:password,salt:rows[0].salt},function(err, pass, salt, hash){
-        //             if(hash === rows[0].password)
-        //             {
-        //                 req.session.user = username;
-        //                 res.redirect('/');
-        //             }else{
-        //                 res.redirect('/local/login');
-        //             }
-        //         });
 
   router.post('/login',
     passport.authenticate('local', { successRedirect: '/',
