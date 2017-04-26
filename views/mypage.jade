@@ -1,0 +1,175 @@
+extends layout
+  
+block content
+    br
+    br
+    br
+    br
+    .row
+      .col-sm-4
+        div
+      .col-sm-4.text-center
+        .col-sm-2
+        .col-sm-8
+          div(style={border: '3px double #f1f1f1',padding:'12px'})
+            label MY PAGE
+        .col-sm-2
+      .col-sm-4
+    br
+    br
+    br
+    .row
+      .col-sm-2
+      .col-sm-10
+        ul.nav.nav-pills(style={width:'100%'}).text-center
+          li(role='presentation',style={width:'12%'})
+            a(href='/user/mypage/orderList') 주문/배송조회
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 위시리스트
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 장바구니
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 회원정보변경
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 회원탈퇴신청
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 적립금조회
+          li(role='presentation',style={width:'12%'})
+            a(href='#') Bum'Store 쿠폰
+      .col-sm-2  
+    hr(style={border:'2px solid black'})
+    .row
+      #mypageMenu1.row
+        .col-sm-2 
+        .col-sm-8
+          .row 
+            .col-sm-4(style={height:'150px',padding:'20px'})
+              img(src="/images/Mypage_banner.png",style={width:'100%',height:'100%'})
+            .col-sm-4(style={height:'150px'})
+              #couponMenu.row(style={padding:'10px',height:'100%'})
+               .col-sm-6(style={background:'#6c00be',height:'100%'})
+                  br
+                  label.head Coupon
+                .col-sm-6(style={background:'#6c00be',height:'100%'})
+                  br
+                  br
+                  label 사용가능한 쿠폰
+                  br
+                  label 0개
+                  br
+                  a(href="#",style={color:'white'}) 자세히보기>
+                  
+            .col-sm-4(style={height:'150px'})
+              .row(style={padding:'10px',height:'100%'})
+                .col-sm-6(style={background:'#ffc000',height:'100%'})
+                  br
+                  label.head Reserve List 
+                .col-sm-6(style={background:'#ffc000',height:'100%'})
+                  br
+                  br
+                  label 적립금
+                  br
+                  label 0원
+                  br
+                  a(href="#",style={color:'black'}) 자세히보기>
+        .col-sm-2 
+      #mypageMenu2.row
+        .col-sm-2 
+        .col-sm-8
+          .row 
+            .col-sm-4(style={height:'150px'})
+              .row(style={padding:'10px',height:'100%'}).text-center
+                br
+                label #{session.displayname}님 환영합니다.
+                
+                
+            .col-sm-4(style={height:'150px'})
+              .row(style={padding:'10px',height:'100%'})
+                .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                  br
+                  label.head Order
+                  label.head(style={color:'white'}) List
+                .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                  br
+                  br
+                  label 진행중인 주문
+                  br
+                  a(href="#",style={color:'black'}) 자세히보기>
+            .col-sm-4(style={height:'150px'})
+              .row(style={padding:'10px',height:'100%'})
+                .col-sm-6(style={background:'#575757',height:'100%'})
+                  br
+                  label.head(style={color:'white'}) Order 
+                  label.head(style={color:'#e4e4e4'}) Amount 
+                .col-sm-6(style={background:'#575757',height:'100%'})
+                  br
+                  br
+                  label 총 주문 금액
+                  br
+                  label 0원
+        .col-sm-2 
+      #mypageMenu3.row.text-center
+        .col-sm-2
+        .col-sm-8
+          .row
+            .col-sm-4(style={height:'150px'})
+              .row(style={height:'100%'}) 
+                .col-sm-6(style={height:'100%',padding:'20px'})
+                  .row(style={height:'100%',background:'#5f6774'})
+                    label.header Modify
+                    label 회원정보수정
+                .col-sm-6(style={height:'100%',padding:'20px'})
+                  .row(style={height:'100%',background:'#5f6774'})
+                    label.header Secede
+                    label 회원탈퇴
+            .col-sm-4(style={height:'150px'})
+              .row(style={height:'100%'}) 
+                .col-sm-6(style={height:'100%',padding:'20px'})
+                  .row(style={height:'100%',background:'#aaaaaa'})
+                    label.header E-money
+                    label 예치금 확인
+                .col-sm-6(style={height:'100%',padding:'20px'})
+                  .row(style={height:'100%',background:'#aaaaaa'})
+                    label.header Wish
+                    label 위시리스트
+            .col-sm-4(style={height:'150px'})
+              .row(style={height:'100%'}) 
+                .col-sm-6(style={height:'100%',padding:'20px'})
+                  .row(style={height:'100%',background:'#aaaaaa'})
+                    label.header Today
+                    label 오늘본상품
+                .col-sm-6(style={height:'100%',padding:'20px'})
+                  .row(style={height:'100%',background:'#aaaaaa'})
+                    label.header Board
+                    label 내 게시물 보기                  
+        .col-sm-2 
+      #mypageMenu4.row
+        .row
+          .col-sm-2 
+          .col-sm-8
+            .row 
+              .col-sm-4(style={height:'150px'})
+                .row(style={padding:'10px',height:'100%'})
+                  .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                    br
+                    label Reserve List 
+                  .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                    br 
+                    label 적립금 
+              .col-sm-4(style={height:'150px'})
+                .row(style={padding:'10px',height:'100%'})
+                  .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                    br
+                    label Coupon
+                  .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                    br
+                    label 사용가능한 쿠폰
+              .col-sm-4(style={height:'150px'})
+                .row(style={padding:'10px',height:'100%'})
+                  .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                    br
+                    label Reserve List 
+                  .col-sm-6(style={background:'#e4e4e4',height:'100%'})
+                    br 
+                    label 적립금 
+          .col-sm-2 

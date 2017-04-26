@@ -19,18 +19,13 @@ html
         background: white;
         z-index: 3;
        }
-       .container {
-       border : 1px solid black;
-       margin : 0px;
-       }
-      
        input{
         margin-bottom : 5px;
         width: 100%;
     
        }
        #main_container{
-          height: 1000px;
+          height: 1500px;
        }
        body{
           margin: 0px;
@@ -78,13 +73,53 @@ html
           color : red;
           margin-right : 9px;
        }
+       #couponMenu {
+        color : white;
        
+       }
+       #mypageMenu1 .head{
+        font-size: 28px;
+       
+       }
+       #mypageMenu2 .head {
+        font-size: 28px;
+       }
+       #mypageMenu3 .col-sm-6 .row{
+          padding-top : 20px;
+          color : white;
+        
+       }
+       #mypageMenu3 .header{
+       
+          font-size: 28px;
+       }
+       .sidemenu {
+        text-decoration: none;
+       }
+       .sidemenu ul{
+          list-style: none outside none; 
+          margin:0; 
+          padding: 0;
+       
+       }
+       .sidemenu li {
+         font-size: 12px;
+         margin-bottom : 4px;
+         line-height: 20px;
+          float : left;
+          width : 33%;
+       }
+       a {
+           text-decoration:none !important;
+       }
+      
+    
   body
     #main_container.row
       #leftTap.col-sm-3
         .row
           a(href="/")
-             h1 B'STORE
+             h1 Bum'Store
         .row
           .col-sm-3
             - if (typeof locals.session.username == 'undefined')
@@ -96,20 +131,105 @@ html
           .col-sm-3
             a(href= '/user/order') ORDER
           .col-sm-3
-            a(href= '/myPage') MYPAGE
+            a(href= '/user/myPage') MYPAGE
         .row
           br
-          a(href="/user/cartList")
+          a(href="/user/cartList") CART
             //- img(src="http://hehekuk.img6.kr/wizdesign/cart1.png", alt="")
-            label CART
           br
           br
         .row
-          input(type="text",name="search",style={width:'80%'})
+          input(type="text",name="search",style={width:'100%',background:'#353535',border:'0px solid #353535',margin:'0px'})
+          hr(style={border:'1px solid white',margin:'0px'})
           //- img(src="http://hehekuk.img6.kr/wizdesign/btn.png",style={width:'10%'})
         .row
-          p CATEGORY
+          br
+          label CATEGORY
+          br
+          br
+          .sidemenu
+            ul
+              li
+                a(href='/shop/shopbrand.html?xcode=071&type=Y', onmouseover="this.innerText='신상5%'", onmouseout="this.innerText='NEW 5%'") NEW 5%
+              li
+                a(href='/shop/bestseller.html?xcode=BEST', onmouseover="this.innerText='베스트 50'", onmouseout="this.innerText='BEST 50'") BEST 50
+              li.fly
+                a(href='/shop/shopbrand.html?xcode=044&type=P', onmouseover="this.innerText='블랙스미스'", onmouseout="this.innerText='BLACKSMITH'") BLACKSMITH
+              li
+                a(href='/shop/shopbrand.html?xcode=054&type=X', onmouseover="this.innerText='아우터'", onmouseout="this.innerText='OUTER'") OUTER
+              li
+                a(href='/shop/shopbrand.html?xcode=056&type=X', onmouseover="this.innerText='상의'", onmouseout="this.innerText='TOP'") TOP
+              li
+                a(href='/shop/shopbrand.html?xcode=055&type=X', onmouseover="this.innerText='셔츠'", onmouseout="this.innerText='SHIRTS'") SHIRTS
+              li
+                a(href='/shop/shopbrand.html?xcode=056&mcode=003&type=X', onmouseover="this.innerText='니트'", onmouseout="this.innerText='KNIT'") KNIT
+              li
+                a(href='/shop/shopbrand.html?xcode=057&type=X', onmouseover="this.innerText='하의'", onmouseout="this.innerText='BOTTOM'") BOTTOM
+              li
+                a(href='/shop/shopbrand.html?xcode=003&type=X', onmouseover="this.innerText='액세서리'", onmouseout="this.innerText='ACC'") ACC
+              li
+                a(href='/shop/shopbrand.html?xcode=060&type=X', onmouseover="this.innerText='가방'", onmouseout="this.innerText='BAG'") BAG
+              li
+                a(href='/shop/shopbrand.html?xcode=058&type=X', onmouseover="this.innerText='신발'", onmouseout="this.innerText='SHOES'") SHOES
+              li.red
+                a(href='/shop/shopbrand.html?xcode=043&type=X', onmouseover="this.innerText='수트'", onmouseout="this.innerText='SUIT'") SUIT
         .row
+          br
+          hr(style={border:'1px solid white',margin:'0px'})
+          br
+        .row
+          label COMMUNITY
+          br
+          br
+          .sidemenu
+              ul
+                  li
+                    a(href='/board/board.html?code=hehekuk_board5', onmouseover="this.innerText='공지사항'", onmouseout="this.innerText='NOTICE'") NOTICE
+                  li
+                    a(href='/board/board.html?code=hehekuk_board1', onmouseover="this.innerText='상품문의'", onmouseout="this.innerText='Q & A'") Q & A
+                  li
+                    a(href='/board/power_review.html', onmouseover="this.innerText='구매후기'", onmouseout="this.innerText='REVIEW'") REVIEW
+                  li
+                    a(href='/board/board.html?code=hehekuk_image2', onmouseover="this.innerText='이벤트'", onmouseout="this.innerText='EVENT'") EVENT
+                  li
+                    a(href='/board/board.html?code=hehekuk_board5&page=1&type=v&num1=999983&num2=00000&number=12&lock=N', onmouseover="this.innerText='맴버쉽'", onmouseout="this.innerText='MEMBERSHIP'") MEMBERSHIP
+                  li
+                    a(href='/board/board.html?code=hehekuk_board5&page=1&type=v&num1=999988&num2=00000&number=3&lock=N&flag=notice', onmouseover="this.innerText='입고지연'", onmouseout="this.innerText='SORRY ITEM'") SORRY ITEM
+        .row
+          br
+          hr(style={border:'1px solid white',margin:'0px'})
+          br
+        .row
+          label NOTICE
+          br
+          br
+          br
+          br
+        .row
+          br
+          hr(style={border:'1px solid white',margin:'0px'})
+          br
+        .row
+          label CUSTOMER CENTER
+          br
+          br
+          label 010-7670-5549
+          br
+          | MON-FRI PM 01:00-PM 06:00
+          br
+          | SAT.SUN.REDDAY OFF
+        .row
+          br
+          .sns
+            span
+              a(href='https://www.instagram.com/okunman')
+                img(src='http://hehekuk.img6.kr/wizdesign/insta3.png')
+            span
+              a(href='https://www.facebook.com/okunmanst')
+                img(src='http://hehekuk.img6.kr/wizdesign/facebook3.png')
+            span
+              a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
+                img(src='http://hehekuk.img6.kr/wizdesign/kakao2.png')
 
       #rightTap.col-sm-9
         block content

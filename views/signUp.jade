@@ -31,7 +31,7 @@ block content
                     label.signHead 아이디
                     input(type="text" id="username" name="username",style={width:'10%'})
                     button(type="submit",id="usernameCheckBtn", style={width:'80px ',height:'30px',background:'#6a6b6d',color:'white'}).btn.btn-default 중복확인
-                    label.checkId(style={display:'none'})
+                    label.checkId(style={visibility:'hidden'}) ㅎㅎ
                     
                 tr 
                   td 
@@ -42,18 +42,18 @@ block content
                   td 
                     label.signStar *
                     label.signHead 연락처
-                    input(type="text" name="phoneNumber" ,style={width:'5%'})
+                    input(type="text" name="phoneNumber1" ,style={width:'5%'})
                     label -      
-                    input(type="text" name="phoneNumber" ,style={width:'5%'})
+                    input(type="text" name="phoneNumber2" ,style={width:'5%'})
                     label -         
-                    input(type="text" name="phoneNumber",style={width:'5%'}) 
+                    input(type="text" name="phoneNumber3",style={width:'5%'}) 
                 tr 
                   td 
                     label.signStar *
                     label.signHead E-mail
-                    input(type="text" name ="email",style={width:'10%'})
+                    input(type="text" name ="email1",style={width:'10%'})
                     label @
-                    input(type="text", name ="email",style={width:'10%'})
+                    input(type="text", name ="email2",style={width:'10%'})
           
             .row.text-center
                 button(type="submit",id="signBtn", style={width:'20%',height:'40px',background:'black',color:'white'}).btn.btn-default 가입완료
@@ -65,7 +65,23 @@ block content
              script.
               $(document).ready(function(){
                   $('#signBtn').click(function(){
-                      console.log('sign');
+                      $.ajax({
+                         url:"/local/signUp", 
+                         type:"post",
+                         data:{
+                            displayname : $('input[name=displayname]').val(),
+                            username:  $('input[name=username]').val(),
+                            password :  $('input[name=password]').val(),
+                            phoneNumber : $('input[name=phoneNumber1]').val()+'-'+$('input[name=phoneNumber2]').val()+'-'+$('input[name=phoneNumber3]').val(),
+                            email : $('input[name=email1]')+'@'+$('input[name=email2]')
+                         },
+                        dataType:"text",
+                        success : function(result) {
+                            if(result=='success'){
+                                var link = '/local/login'
+                                $(location).attr('href', link);
+                            }
+                      }});
                   });
                   $('#cancleBtn').click(function(){
                       console.log('cancle');
@@ -79,15 +95,13 @@ block content
                          },
                         dataType:"text",
                         success : function(result) {
-                            console.log(result);
+                              console.log(result);
                             if(result=='reject'){
-                            console.log('111');
-                                $('.checkId').val('ID가 중복되었습니다.');
-                                $('.checkId').css("diplay","block");
+                                $('.checkId').text('ID가 중복되었습니다.');
+                                $('.checkId').css({visibility:'visible',color:'red'});
                             }else{
-                            console.log(result);
-                                $('.checkId').val('사용 가능한 ID 입니다.')
-                                $('.checkId').css("diplay","block");
+                                $('.checkId').text('사용가능한 ID 입니다.');
+                                $('.checkId').css({visibility:'visible',color:'green'});
                             }
                       }});
                   });

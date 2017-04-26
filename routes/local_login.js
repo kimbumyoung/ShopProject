@@ -46,14 +46,21 @@ module.exports = function (hasher,conn,session,passport){
   router.post("/signUp",function(req,res){
       var username = req.body.username;
       var password = req.body.password;
+      var authid = 'local';
       var displayname = req.body.displayname;
+      var phoneNumber = req.body.phoneNumber;
+      var email = req.body.email;
+
 
       hasher({'password' : password}, function(err, pass, salt, hash) {
 
           var user = {
-            username : req.body.username,
+            username : username,
             password : hash,
-            displayname : req.body.displayname,
+            authid : authid,
+            displayname : displayname,
+            phoneNumber : phoneNumber,
+            email : email,
             salt : salt
           };
           var sql = 'insert into users set ?';
@@ -61,7 +68,7 @@ module.exports = function (hasher,conn,session,passport){
             if(err){
                 console.log(err);
             }else{
-                res.redirect('/local/login');
+                res.send('success');
             }
           });
 

@@ -9,11 +9,11 @@ block content
           li(data-target='#carousel-example-generic', data-slide-to='2')
         .carousel-inner(role='listbox')
           .item.active
-            img(src='/images/11.png' , alt='...')
+            img(src='/images/mainbanner.png' , alt='...')
             .carousel-caption
               | ...
           .item
-            img(src='/images/11.png', alt='...')
+            img(src='/images/mainbanner.png', alt='...')
             .carousel-caption
               | ...
           |     ...
@@ -45,7 +45,7 @@ block content
         .col-md-3.col-sm-6
           span.thumbnail
             a(href='/product/read?pboardno='+ productList.pboardno)
-              img(src='images/'+productList.mainimage, style={height:'50%'})
+              img(src='images/'+productList.mainimage, style={height:'400px'})
             h4=productList.productname
             hr 
             p=productList.content

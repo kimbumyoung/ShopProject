@@ -92,6 +92,12 @@ module.exports = function(conn){
     res.render('orderComplete');
   });
 
+  router.get('/mypage',function(req,res){
+      res.render('mypage');
+  });
+  router.get('/mypage/orderList',function(req,res){
+      res.render('orderList');
+  });
 
 
 var b = function sqlAdd(orderdetail){
