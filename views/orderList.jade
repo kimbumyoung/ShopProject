@@ -1,4 +1,7 @@
 extends layout
 
 block content
-    h1 orderList Page
+  h1 orderList Page
+  .row
+    each list, i in rows
+      label=i

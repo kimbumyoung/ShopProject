@@ -112,7 +112,32 @@ html
        a {
            text-decoration:none !important;
        }
-      
+       .snd ul {
+         margin : 0px;
+         padding : 0px;
+       }
+       .sns li{
+          float : left;
+          width : 90px;
+          margin : 0px;
+          padding : 0px;
+       }
+       .sns a {
+          margin : 0px;
+          padding : 0px;
+          width : 100%;
+          
+       }
+       #searchinput {
+          border : none;
+          outline: none;
+
+       }
+       .nav.nav-pills li a {
+            color : black;  
+            font-weight: bold;
+       }
+
     
   body
     #main_container.row
@@ -139,9 +164,10 @@ html
           br
           br
         .row
-          input(type="text",name="search",style={width:'100%',background:'#353535',border:'0px solid #353535',margin:'0px'})
+          input(type="text",id="searchinput",name="search",style={width:'90%',background:'#353535',margin:'0px'})
+          img(src="/images/search1.png", style={width:'10%',height:'25px'})
           hr(style={border:'1px solid white',margin:'0px'})
-          //- img(src="http://hehekuk.img6.kr/wizdesign/btn.png",style={width:'10%'})
+          
         .row
           br
           label CATEGORY
@@ -220,16 +246,19 @@ html
           | SAT.SUN.REDDAY OFF
         .row
           br
-          .sns
-            span
-              a(href='https://www.instagram.com/okunman')
-                img(src='http://hehekuk.img6.kr/wizdesign/insta3.png')
-            span
-              a(href='https://www.facebook.com/okunmanst')
-                img(src='http://hehekuk.img6.kr/wizdesign/facebook3.png')
-            span
-              a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
-                img(src='http://hehekuk.img6.kr/wizdesign/kakao2.png')
+          //- .sns  
+          //-     ul 
+          //-       li
+          //-         a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
+          //-           img(src="/images/kakao.png",style={width:'100%'})
+          //-       li
+          //-         a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
+          //-           img(src="/images/facebook.png",style={width:'100%'})
+          //-       li
+          //-         a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
+          //-           img(src="/images/twitter.png",style={width:'40%'})
+          //-     
+          
 
       #rightTap.col-sm-9
         block content

@@ -87,7 +87,6 @@ module.exports = function (hasher,conn,session,passport){
                   res.send('permit');
               }
       });
-
   });
 
   passport.use(new LocalStrategy(
@@ -96,7 +95,6 @@ module.exports = function (hasher,conn,session,passport){
         var id = username;
         var pw = password;
         var sql = 'select *from users where username = ?';
-
         conn.query(sql,[id],function(err,rows){
                 if(err){
                     return done('사용자를 찾을수 없습니다.');

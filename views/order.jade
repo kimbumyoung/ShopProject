@@ -12,7 +12,7 @@ block content
       .col-sm-4.text-center
         .col-sm-2
         .col-sm-8
-          div(style={border: '3px double #f1f1f1',padding:'12px'})
+          div(style={border:'3px double #f1f1f1',padding:'12px'})
             label ORDER LIST
         .col-sm-2
       .col-sm-4
@@ -58,13 +58,18 @@ block content
         .col-sm-1.text-center 
           label [기본배송]
           input(type="hidden",value=list.pno,name="pnoArray")
+          input(type="hidden",value=list.color,name="colorArray")
+          input(type="hidden",value=list.size,name="sizeArray")
+          input(type="hidden",value=list.productcount,name="pcountArray")
+          input(type="hidden",value=list.price,name="priceArray")
+          input(type="hidden",value=list.productname,name="productnameArray")        
       br  
     .row
       .col-sm-8
       .col-sm-4
         label 총 구매 금액:
         label#sumPrice
-          =totalPrice[0].price
+          =total[0].price
         label 원 + 배송료 2,500원 = 
         label#totalPrice(style={color:'red'})
           
@@ -161,8 +166,10 @@ block content
         button(type="submit",id='buyBtn',style={width:'15%',height:'50px'}).btn.btn-default 주문하기
         button(type="submit",style={width:'15%',height:'50px'}).btn.btn-default 주문취소
         input(type="hidden",id='user_num' value="#{session.user_num}")
+        input(type="hidden",id='totalCount' value=total[0].totalcount)
         script.
          $(document).ready(function(){
+            var totalCount = $('#totalCount').val();
             var sumPrice = parseInt($('#sumPrice').text(),10) + 2500; //상품 총 가격  + 배송비
             $('#totalPrice').text(sumPrice+' 원');
               
@@ -191,7 +198,7 @@ block content
             });  
               
             $('#buyBtn').click(function(event){
-                var  successCheck = false;
+                var successCheck = false;
                 var date = new Date();
                 var year = date.getYear()+1900;
                 var month = date.getMonth()+1;
@@ -201,7 +208,17 @@ block content
                 var sec = date.getSeconds();
                 var currentDate = year+"."+month+"."+day+"."+hour+"."+minute+"."+sec;
                 var pnoArray = $("input[name=pnoArray]");
+                var colorArray = $("input[name=colorArray]");
+                var sizeArray = $("input[name=sizeArray]");
+                var pcountArray = $("input[name=pcountArray]");
+                var priceArray = $("input[name=priceArray]");
+                var productnameArray = $("input[name=productnameArray]");
+                
                 var pno ='';
+                var size ='';
+                var color ='';
+                var pcount ='';
+                var price ='';
                 
                 //태그값 받기
                 var user_num = $('#user_num').val();
@@ -210,13 +227,20 @@ block content
                 var orderPhone = $('#orderPhone1').val() +'-'+ $('#orderPhone2').val()+'-'+ $('#orderPhone3').val();
                 var orderAddress = $('#sample6_postcode').val()+','+$('#sample6_address').val()+','+$('#sample6_address2').val();
                 var orderMessage =$('#orderMessage').val();
-                
                 console.log(orderPhone);
                 //pno 한줄로 생성
                 for(var i=0; i<pnoArray.length;i++){
                   pno+=pnoArray.eq(i).val();
+                  size+=sizeArray.eq(i).val();
+                  color+=colorArray.eq(i).val();
+                  pcount+=pcountArray.eq(i).val();
+                  price+=priceArray.eq(i).val();
                   if(i!=pnoArray.length-1){
                     pno+=',';
+                    size+=',';
+                    color+=',';
+                    pcount+=',';
+                    price+=',';
                   }
                 }
                 //orderDetail 등록
@@ -226,7 +250,12 @@ block content
                    data:{
                     orderDetailno : currentDate+"."+user_num,
                     user_num : user_num,
-                    pno : pno
+                    pno : pno,
+                    size : size,
+                    color : color,
+                    pcount : pcount,
+                    price : price
+                    
                    },
                    dataType:"text",
                   success : function(result) {
@@ -244,6 +273,9 @@ block content
                                  orderDetailno : currentDate+"."+user_num,
                                  orderMessage : orderMessage,
                                  orderDetailno : currentDate+"."+$('#user_num').val(),
+                                 totalPrice : sumPrice,
+                                 totalCount : totalCount,
+                                 productHead : productnameArray.eq(0).val()
                                },
                                dataType:"text",
                               success : function(result) {
