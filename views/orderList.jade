@@ -1,7 +1,70 @@
 extends layout
 
 block content
-  h1 orderList Page
-  .row
-    each list, i in rows
-      label=i
+    br
+    br
+    br
+    br
+    .row
+      .col-sm-4
+        div
+      .col-sm-4.text-center
+        .col-sm-2
+        .col-sm-8
+          div(style={border: '3px double #f1f1f1',padding:'12px'})
+            label MY PAGE
+        .col-sm-2
+      .col-sm-4
+    br
+    br
+    br
+    .row
+      .col-sm-2
+      .col-sm-10
+        ul.nav.nav-pills(style={width:'100%'}).text-center
+          li(role='presentation',style={width:'12%'})
+            a(href='/user/mypage/orderList') 주문/배송조회
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 위시리스트
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 장바구니
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 회원정보변경
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 회원탈퇴신청
+          li(role='presentation',style={width:'12%'})
+            a(href='#') 적립금조회
+          li(role='presentation',style={width:'13%'})
+            a(href='#') Bum'Store 쿠폰
+      .col-sm-2  
+    hr(style={border:'2px solid black'})
+    .row(style={padding:'0px 20px'})
+      label 주문/배송조회
+    br
+    .row(style={padding:'0px 5%'})
+      div(style={border:'3px solid #e4e4e4',width:'100%',padding:'10px 20px'})
+        label(style={color:'#575757'}) [김범영]님이 쇼핑몰에서 주문한 내역입니다.
+    .row(style={padding:'0px 5%'})
+      br
+      br
+      .row
+        hr(style={border:'1px solid black',margin:'0px'})
+        br
+        .col-sm-1.text-center 
+          label 번호
+        .col-sm-1.text-center 
+          label 주문일자
+        .col-sm-7.text-center 
+          label 상품명
+        .col-sm-1.text-center 
+          label 결제금액
+        .col-sm-1.text-center 
+          label 주문상세 
+        .col-sm-1.text-center 
+          label 배송현황
+        br
+        br
+        hr(style={border:'1px solid #b7b7b7',margin:'0px'})
+      each list, i in rows
+        .row 
+          label=date[i]
