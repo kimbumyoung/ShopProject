@@ -105,7 +105,14 @@ module.exports = function(conn){
   router.get('/mypage',function(req,res){
       res.render('mypage');
   });
-
+  router.get('/orderInfoPopup',function(req,res){
+      var orderDetailno = req.param('orderno');
+      var sql = 'select *from ordertable a join orderdetail b where a.orderno = ? and a.orderDetailno = b.orderDetailno';
+      conn.query(sql,[orderDetailno],function(err,rows){
+            console.log(rows);
+            res.render('orderInfoPopup',{rows:rows});
+      });
+  });
   Date.prototype.toFormatString = function(format) {
       var year = this.getFullYear();
       var month = this.getMonth() + 1;

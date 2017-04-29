@@ -52,9 +52,9 @@ block content
         br
         .col-sm-1.text-center 
           label 번호
-        .col-sm-1.text-center 
+        .col-sm-2.text-center 
           label 주문일자
-        .col-sm-7.text-center 
+        .col-sm-6.text-center 
           label 상품명
         .col-sm-1.text-center 
           label 결제금액
@@ -66,5 +66,47 @@ block content
         br
         hr(style={border:'1px solid #b7b7b7',margin:'0px'})
       each list, i in rows
-        .row 
-          label=date[i]
+        .row.orderlistRows(style={padding:'20px 0px'}) 
+          .col-sm-1.text-center 
+            label=i+1
+          .col-sm-2.text-center 
+            label=date[i]
+          .col-sm-6
+            label=list.productHead
+            -if(list.totalCount>1)
+              label 외
+              label=list.totalCount-1
+              label 건
+          .col-sm-1.text-center 
+            label=list.totalPrice
+            label 원
+          .col-sm-1 
+            button(type="submit",style={height:'30px'}).btn.btn-default.readOrder 조회
+            input(type="hidden",value=list.orderno)
+          .col-sm-1.text-center 
+            button(type="submit",style={height:'30px'}).btn.btn-default 조회
+          
+          
+          
+              
+     form(name='popupForm')
+      input(type="hidden",name="testVal")
+
+    script.
+      $(document).ready(function(){
+      
+         function popupOpen(orderno){
+           var popUrl = "/user/orderInfoPopup?orderno="+orderno;    //팝업창에 출력될 페이지 URL
+           var winWidth = 700;
+           var winHeight = 600;
+           var popOption = "width="+winWidth+", height="+winHeight+",resizable=no, status=no;";    //팝업창 옵션(optoin)
+             window.open(popUrl,"popupForm",popOption);
+           };
+           
+         $('.readOrder').click(function(event){
+              var orderno =  $(this).next().val();
+              popupOpen(orderno);
+         });
+         
+         });
+   
