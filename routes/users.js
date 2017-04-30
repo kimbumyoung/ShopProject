@@ -107,10 +107,13 @@ module.exports = function(conn){
   });
   router.get('/orderInfoPopup',function(req,res){
       var orderDetailno = req.param('orderno');
-      var sql = 'select *from ordertable a join orderdetail b where a.orderno = ? and a.orderDetailno = b.orderDetailno';
+      var sql = 'select orderno,orderName,orderPhone,orderAddress,orderMessage,orderdate,totalCount,totalPrice,b.size,b.color,b.pcount,b.price,p.productname,p.mainimage from ordertable a join orderdetail b join products p where a.orderno = ? and a.orderDetailno = b.orderDetailno and b.pno = p.pno';
       conn.query(sql,[orderDetailno],function(err,rows){
             console.log(rows);
-            res.render('orderInfoPopup',{rows:rows});
+            var orderdate;
+            var date = new Date([rows[0].orderdate]);
+            orderdate= date.toFormatString("yyyy-MM-dd");
+            res.render('orderInfoPopup',{rows:rows,orderdate: orderdate});
       });
   });
   Date.prototype.toFormatString = function(format) {
