@@ -9,7 +9,30 @@
 module.exports = function (hasher,conn,session,passport){
   var express = require('express');
   var LocalStrategy = require('passport-local').Strategy;
+  var FacebookStrategy = require('passport-facebook').Strategy; // facebook 인증 Strategy
+
   var router = express.Router();
+
+  // passport.use(new FacebookStrategy({
+  //     clientID: FACEBOOK_APP_ID,
+  //     clientSecret: FACEBOOK_APP_SECRET,
+  //     callbackURL: "http://localhost:3000/auth/facebook/callback",
+  //     profileFields: ['id','email','gender','link','locale','name','timezone','updated_time','verified','displayName'] //profile에 다음과 같은 항목을 보여주고싶을때 추가해야한다. scope에 추가한 항목이 이 안에 없으면 추가해줘야 profile에 나타난다.
+  //   },
+  //   function(accessToken, refreshToken, profile, cb) {
+  //     var authid = 'facebook:' +profile.id;
+  //     var sql = 'select *from user where authid=?';
+  //     conn.query(sql,[authid],function(err,rows,fields){
+  //     if(rows.length>0){ //사용자가 있다면
+  //        done(null,results[0]);
+  //     }else{  //사용자가 없다면
+  //         var sql = 'insert into user set ?';
+  //         var newUser = {
+  //           'authId' : authid,
+  //           'displayname': profile.displayName,
+  //         };
+  //
+  //   }});
 
   passport.serializeUser(function(user, done) {
     console.log(user.username);
@@ -120,6 +143,15 @@ module.exports = function (hasher,conn,session,passport){
                                      failureRedirect: '/local/login',
                                      failureFlash: false })
   );
+
+  // router.get('/auth/facebook',
+  // passport.authenticate('facebook'));
+  //
+  // router.get('/auth/facebook/callback',
+  //   passport.authenticate('facebook', { failureRedirect: '/local/login' }),
+  //   function(req, res) {
+  //     res.redirect('/');
+  //   });
 
 
   return router;

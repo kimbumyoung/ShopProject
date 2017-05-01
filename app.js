@@ -48,6 +48,7 @@ var users = require('./routes/users')(conn);
 var login = require('./routes/local_login')(hasher,conn,session,passport);
 var admin = require('./routes/admin')(app,conn);
 var product = require('./routes/product')(conn);
+
 app.locals.pretty = true;//jade가 웹에서 html 코드가 보기좋게 된다.
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

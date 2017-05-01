@@ -7,36 +7,63 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.js', integrity='sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=', crossorigin='anonymous')
 
     style.
-       .container {
-       border : 1px solid black;
-       margin : 0px;
-       }
+  
        .row {
         border : 0px solid red;
         padding : 0px;
        }
        #left{
-          background-color: lightblue;
+          background-color: #c3c5c9;
           height: 100%;
+          margin: 0px;
+          padding : 0px;
+          position:fixed;
+       }
+       ul{
+          padding : 0px;
+          margin : 0px;
+          list-style : none;
+       }
+       li {
+          border : 2px solid #ededed;
+          float : left;
+          width : 25%;
+          height : 150px;
+          text-align : center;
        }
        input{
         margin-bottom : 5px;
         width: 100%;
        }
-       #main_container{
-         height : 100%;
+       body {
+        margin : 0px;
+        padding : 0px 7px;
        }
-       
-
+       .borderbottom{
+        border-bottom : 1px solid #c3c5c9;
+       }
+       hr {
+        border : 2px solid #ededed;
+        width : 80%;
+       }
+       .circle {
+         border-radius: 50%;
+         width: 130px;
+         height: 130px; 
+         color : white;
+         padding-top : 30%;
+         text-align : center;
+       }
   body
-  #main_container.row
-    #left.col-sm-3
+  .row
+    #left.col-sm-2
       .list-group
-        a(href="#").list-group-item.active home
+        a(href="/admin").list-group-item.active 서비스현황
         a(href="#").list-group-item 주문현황
         a(href="/admin/add_product").list-group-item 상품 등록
         a(href="/admin/add_productlist").list-group-item 상품 판매등록
         a(href="#").list-group-item 공지사항
-        
-    .col-sm-9(style={padding:'40px'})
+    .col-sm-2
+    .col-sm-10(style={background:'#ededed'})
       block content
+        
