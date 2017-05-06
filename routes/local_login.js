@@ -13,33 +13,56 @@ module.exports = function (hasher,conn,session,passport){
 
   var router = express.Router();
 
-  // passport.use(new FacebookStrategy({
-  //     clientID: FACEBOOK_APP_ID,
-  //     clientSecret: FACEBOOK_APP_SECRET,
-  //     callbackURL: "http://localhost:3000/auth/facebook/callback",
-  //     profileFields: ['id','email','gender','link','locale','name','timezone','updated_time','verified','displayName'] //profile에 다음과 같은 항목을 보여주고싶을때 추가해야한다. scope에 추가한 항목이 이 안에 없으면 추가해줘야 profile에 나타난다.
-  //   },
-  //   function(accessToken, refreshToken, profile, cb) {
-  //     var authid = 'facebook:' +profile.id;
-  //     var sql = 'select *from user where authid=?';
-  //     conn.query(sql,[authid],function(err,rows,fields){
-  //     if(rows.length>0){ //사용자가 있다면
-  //        done(null,results[0]);
-  //     }else{  //사용자가 없다면
-  //         var sql = 'insert into user set ?';
-  //         var newUser = {
-  //           'authId' : authid,
-  //           'displayname': profile.displayName,
-  //         };
-  //
-  //   }});
+  passport.use(new FacebookStrategy({
+      clientID: '432342260467190',
+      clientSecret: '95d9d29e7ac489140a5ba1ed491a60a8',
+      callbackURL: '/local/auth/facebook/callback',
+      profileFields: ['id','email','gender','link','locale','name','timezone','updated_time','verified','displayName'] //profile에 다음과 같은 항목을 보여주고싶을때 추가해야한다. scope에 추가한 항목이 이 안에 없으면 추가해줘야 profile에 나타난다.
+    },
+    function(accessToken, refreshToken, profile,done) {
+      var username = profile.id;
+      var sql = 'select *from users where username= ?';
+      console.log('##########################################');
+      console.log(profile);
+      console.log(profile.emails[0].value);
+      conn.query(sql,[username],function(err,rows,fields){
+      if(rows.length>0){ //사용자가 있다면
+        done(null,rows[0]);
+      }else{  //사용자가 없다면
+          var sql = 'insert into users set ?';
+          var newUser = {
+            authId : 'facebook',
+            username : profile.id,
+            displayname: profile.displayName,
+            email : profile.emails[0].value
+        };
+        conn.query(sql,newUser,function(err,rows){
+            if(err){
+              console.log(err);
+            }else{
+              var sql = 'select *from users where username =?';
+              conn.query(sql,[username],function(err,rows){
+                if(err){
+                  console.log(err);
+                }else{
+                  done(null,rows[0]);
+                }
+              });
+            }
+        });
+    }
+  });
+}
+));
 
   passport.serializeUser(function(user, done) {
-    console.log(user.username);
-    done(null, user.username);
+       console.log('0000000000000000000000000000000000');
+       console.log(user);
+       done(null, user.username);
   });
 
   passport.deserializeUser(function(id, done) {
+    console.log('계속들어옴2');
     var sql = "select *from users where username = ?";
     conn.query(sql,[id],function(err,rows){
       if(err){
@@ -76,7 +99,6 @@ module.exports = function (hasher,conn,session,passport){
 
 
       hasher({'password' : password}, function(err, pass, salt, hash) {
-
           var user = {
             username : username,
             password : hash,
@@ -144,15 +166,15 @@ module.exports = function (hasher,conn,session,passport){
                                      failureFlash: false })
   );
 
-  // router.get('/auth/facebook',
-  // passport.authenticate('facebook'));
-  //
-  // router.get('/auth/facebook/callback',
-  //   passport.authenticate('facebook', { failureRedirect: '/local/login' }),
-  //   function(req, res) {
-  //     res.redirect('/');
-  //   });
-
+  router.get('/auth/facebook/login',passport.authenticate('facebook',{scope:'email'}));  //facebook strategy 를 사용하겠다. scope은 facebook 회원의 정보를 제공해달라 허가를 구하는거다.
+  router.get('/auth/facebook/callback',
+    passport.authenticate('facebook',
+      {
+        successRedirect: '/', //로그인 성공
+        failureRedirect: '/local/login', //로그인 실패
+        failureFlash: false
+      })
+    ); //타사인증은 라우트가 보통 2개다.
 
   return router;
 };

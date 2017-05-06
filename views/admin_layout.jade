@@ -54,6 +54,9 @@ html
          padding-top : 30%;
          text-align : center;
        }
+       .text_Left {
+          text-align : left;
+       }
   body
   .row
     #left.col-sm-2
@@ -64,6 +67,6 @@ html
         a(href="/admin/add_productlist").list-group-item 상품 판매등록
         a(href="#").list-group-item 공지사항
     .col-sm-2
-    .col-sm-10(style={background:'#ededed'})
+    .col-sm-10(style={background:'#ededed',margin:'0px',padding:'0px'})
       block content
         

@@ -36,7 +36,6 @@ app.get('*', function(req, res, next) {
   }else{
     res.locals.session = 'null';
   }
-
   console.dir(req.user);
 
   next();
