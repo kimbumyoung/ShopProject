@@ -43,8 +43,7 @@ html
         border-bottom : 1px solid #c3c5c9;
        }
        hr {
-        border : 2px solid #ededed;
-        width : 80%;
+        border : 1px solid #ededed;
        }
        .circle {
          border-radius: 50%;
@@ -57,6 +56,14 @@ html
        .text_Left {
           text-align : left;
        }
+       a {
+        color:gray;
+       }
+       #listrows {
+          border-bottom: 1px solid #ededed;
+          margin :0px;
+       }
+  
   body
   .row
     #left.col-sm-2
@@ -65,8 +72,9 @@ html
         a(href="#").list-group-item 주문현황
         a(href="/admin/add_product").list-group-item 상품 등록
         a(href="/admin/add_productlist").list-group-item 상품 판매등록
-        a(href="#").list-group-item 공지사항
+        a(href="/admin/noticeList").list-group-item 공지사항 등록
     .col-sm-2
-    .col-sm-10(style={background:'#ededed',margin:'0px',padding:'0px'})
+    .col-sm-10(style={margin:'0px',padding:'0px'})
+      //- background:'#ededed',
       block content
         

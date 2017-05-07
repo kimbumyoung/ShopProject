@@ -40,6 +40,7 @@ module.exports = function(app,conn){
       }
         console.log(rows);
     });
+      conn.end();
 
     console.log(product);
   //console.log(productname,content,mainimage,color,price,contentimage,category);
@@ -53,6 +54,7 @@ module.exports = function(app,conn){
         console.log(rows);
         res.render('admin_productlist',{rows:rows});
     });
+      conn.end();
   });
 
 router.post('/productlist',function(req,res){
@@ -61,8 +63,83 @@ router.post('/productlist',function(req,res){
   conn.query(sql,[pno],function(err,rows){
       console.log(rows);
   });
+    conn.end();
+});
+router.get('/noticeList',function(req,res){
+  var sql = 'select *from notice';
+  var array= [];
+  conn.query(sql,function(err,rows){
+      if(err){
+        console.log(err);
+      }else{
+
+        for(var i=0;i<rows.length; i++){
+          var date = new Date([rows[i].noticedate]);
+          array[i]= date.toFormatString("yyyy-MM-dd");
+        }
+        res.render('admin_noticeList',{rows:rows,date:array});
+      }
+  });
+    conn.end();
+  console.log('공지사항 읽기');
 
 });
+router.get('/noticeRegister',function(req,res){
+  console.log('공지사항 작성');
+  res.render('admin_noticeRegister');
+});
+router.post('/noticeRegister',function(req,res){
+
+  var notice = {
+    title : req.body.title,
+    content : req.body.content
+  };
+  var sql = 'insert into notice set ?';
+  conn.query(sql,notice,function(err,rows){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/noticeList');
+    }
+  });
+    conn.end();
+});
+
+router.get('/noticeRead',function(req,res){
+  var noticeno = req.param('noticeno');
+  var sql = 'select *from notice where noticeno = ?';
+  conn.query(sql,[noticeno],function(err,rows){
+    if(err){
+      console.log(err);
+    }else{
+      var noticedate;
+      var date = new Date([rows[0].noticedate]);
+      noticedate= date.toFormatString("yyyy-MM-dd");
+      res.render('noticeRead',{rows:rows,noticedate:noticedate});
+    }
+
+  });
+    conn.end();
+});
+
+Date.prototype.toFormatString = function(format) {
+      var year = this.getFullYear();
+      var month = this.getMonth() + 1;
+      var day = this.getDate();
+      var hour = this.getHours();
+      var minute = this.getMinutes();
+      var second = this.getSeconds();
+      if (format === null) format = "yyyy-MM-dd";
+      format = format.replace("yyyy", year);
+      format = (month < 10) ? format.replace("MM", "0" + month) : format.replace("MM", month);
+      format = format.replace("M", month);
+      format = (day < 10) ? format.replace("dd", "0" + day) : format.replace("dd", day);
+      format = format.replace("d", day);
+      format = (hour < 10) ? format.replace("HH", "0" + hour) : format.replace("HH", hour);
+      format = (minute < 10) ? format.replace("mm", "0" + minute) : format.replace("mm", minute);
+      format = (second < 10) ? format.replace("ss", "0" + second) : format.replace("ss", second);
+      return format;
+};
 
 
   return router;

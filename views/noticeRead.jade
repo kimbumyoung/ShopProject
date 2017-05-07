@@ -1,0 +1,34 @@
+extends layout
+block content 
+  .row(style={padding:'30px'}).noticeReadPage
+    br
+    br
+    br
+    br
+    .row
+      .col-sm-4
+        div
+      .col-sm-4.text-center
+        .col-sm-2
+        .col-sm-8
+          div(style={border: '3px double #f1f1f1',padding:'12px'})
+            label 공지사항
+        .col-sm-2
+      .col-sm-4
+    br
+    br
+    hr(style={margin:'0px',border:'1px solid black'})
+    .row.text-center
+      label.noticeReadTitle [공지]   
+      label.noticeReadTitle=rows[0].title
+    hr(style={margin:'0px',border:'1px solid #f1f1f1'})
+    .row
+      label DATE :
+      label=noticedate
+      br
+      label NAME :
+      label=rows[0].writer
+    hr(style={margin:'0px',border:'1px solid #f1f1f1'})
+    .row 
+      label=rows[0].content
+    hr(style={margin:'0px',border:'1px solid #f1f1f1'})

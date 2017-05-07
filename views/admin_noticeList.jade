@@ -1,0 +1,46 @@
+extends admin_layout
+block content
+  .row(style={padding:'30px',margin:'0px'})
+    br
+    br
+    br
+    br
+    .row
+      .col-sm-4
+        div
+      .col-sm-4.text-center
+        .col-sm-2
+        .col-sm-8
+          div(style={border: '3px double #f1f1f1',padding:'12px'})
+            label Notice Register
+        .col-sm-2
+      .col-sm-4
+    br
+    hr(style={border:'1px solid black',margin:'0px'})
+    .row(style={margin:'0px',padding:'10px 0px'})
+      .col-sm-1.text-center 
+        label No
+      .col-sm-7.text-center 
+        label TITLE
+      .col-sm-1.text-center 
+        label NAME
+      .col-sm-2.text-center 
+        label DATE
+      .col-sm-1.text-center 
+        label HIT
+    hr(style={border:'1px solid #b7b7b7',margin:'0px'})
+    each list, i in rows
+      #listrows.row
+        .col-sm-1.text-center  
+          label=i
+          input(type='hidden',name='noticeno',id='noticeno',value=list.noticeno)
+        .col-sm-7.text-center
+          a(href="/admin/noticeRead?noticeno="+list.noticeno)
+            label=list.title
+        .col-sm-1.text-center 
+          label=list.writer
+        .col-sm-2.text-center 
+          label=date[i]
+        .col-sm-1.text-center 
+          label=list.readcnt
+    

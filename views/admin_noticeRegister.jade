@@ -1,0 +1,61 @@
+extends admin_layout
+block content 
+  .row(style={padding:'0px',margin:'0px'})
+    br
+    br
+    br
+    br
+    .row
+      .col-sm-4
+        div
+      .col-sm-4.text-center
+        .col-sm-2
+        .col-sm-8
+          div(style={border: '3px double #f1f1f1',padding:'12px'})
+            label Notice Register
+        .col-sm-2
+      .col-sm-4
+    hr
+    .row 
+      .col-sm-2
+      .col-sm-1.text-center
+        label TITLE 
+      .col-sm-7
+        input(type="text",id="title",name="title")
+      .col-sm-2
+    hr
+    .row 
+      .col-sm-2
+      .col-sm-1.text-center(style={padding:'150px 0px'})
+        label content 
+      .col-sm-7
+        textarea(style={width :'100%',height:'400px'},id="content",name="content")
+      .col-sm-2
+    hr
+    .row.text-center
+        button(type="submit",style={height:'30px',width:'10%'}).btn.btn-default 등록
+    
+    
+    form(method="post", action="/admin/noticeRegister",style={display:'none'})
+        
+        
+        
+        
+        
+        
+      
+  script.
+    $(document).ready(function(){
+      
+      $('button').click(function(event){
+        $('form').append($('#content').clone());
+        //- $('form').append($('#title').clone().val($('#title').val().replaceAll("\r\n","<br>")));
+        var textareaEnter = $('#title').val().replace("\r\n", "<br>");
+        var b = $('#title').clone();
+        b.val(textareaEnter);
+        //여기서부터
+        $('form').append(b);
+        $('form').submit();
+      });
+    
+    });
