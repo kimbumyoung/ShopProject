@@ -18,9 +18,9 @@ app.use(session({
 //위 사항은 권장값이다.
 }));
 var conn = mysql.createConnection({
-  //host : 'localhost',
-  host     : '113.198.81.98',
-  port : '80',
+  host : 'localhost',
+  // host : '113.198.81.98',
+  // port : '80',
   user     : 'root',
   password : '1234',
   database : 'shop'

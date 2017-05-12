@@ -9,17 +9,16 @@ module.exports = function(conn){
     conn.query(sql,function(err,rows){
       res.render('index',{rows:rows});
     });
-
   });
 
   router.get('/test',function(req,res){
     console.log('eeee');
     res.render('test');
   });
+
   router.get('/admin',function(req,res){
     res.render('admin_index');
   });
-
 
   return router;
 };
