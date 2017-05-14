@@ -11,14 +11,6 @@ module.exports = function(conn){
     });
   });
 
-  router.get('/test',function(req,res){
-    console.log('eeee');
-    res.render('test');
-  });
-
-  router.get('/admin',function(req,res){
-    res.render('admin_index');
-  });
 
   return router;
 };

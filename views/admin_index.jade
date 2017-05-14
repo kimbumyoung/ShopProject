@@ -73,34 +73,30 @@ block content
             | More Info 
             i.fa.fa-chevron-circle-right
       .col-lg-1
-  .row(style={padding :'30px 100px'})
+  .row(style={padding :'30px 100px',overflow :'hidden'})
     label 최근 구매자
-    hr(style={border:'1px solid black',margin:'0px'})
+    hr(style={border:'1px solid black'})
     .col-sm-2.text-center 
       label 번호
     .col-sm-2.text-center 
-      label 구매자 아이디
-    .col-sm-6.text-center 
       label 구매자 이름
+    .col-sm-6.text-center 
+      label 주문 메세지
     .col-sm-2.text-center 
       label 결제 금액
-    hr(style={border:'1px solid #b7b7b7',margin:'0px'})
-    each list, i in rows
-      .row.orderlistRows(style={padding:'20px 0px'}) 
+    hr(style={border:'1px solid #b7b7b7'})
+    each list, i in latestList
+      .row.orderlistRows(style={padding:'10px 0px',margin:'0px'}) 
         .col-sm-2.text-center 
           label=i+1
         .col-sm-2.text-center 
-          label=date[i]
-        .col-sm-6
-          label=list.productHead
-          -if(list.totalCount>1)
-            label 외
-            label=list.totalCount-1
-            label 건
-        .col-sm-2.text-center 
-          label=list.totalPrice
+          label=list.orderName
+        .col-sm-6.text-center 
+          label=list.orderMessage
+        .col-sm-2.text-center
+          label=list.totalPrice-2500
           label 원
-      
+          
   .row(style={padding:'0px 10px',margin:'0px'}) 
     .col-sm-6(style={padding:'0px 30px'})
       br

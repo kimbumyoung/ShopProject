@@ -17,6 +17,13 @@ module.exports = function(app,conn){
     res.render('admin_add_product');
   });
 
+  router.get('/',function(req,res){
+    var sql = 'SELECT * FROM ordertable order by orderno desc limit 5';
+    conn.query(sql,function(err,latestList){
+            res.render('admin_index',{latestList:latestList});
+      });
+
+  });
   router.post('/add_product',upload.array('mainimage'),function(req,res){
     //upload.single('avatar') middleware 사용자가 전송한 데이터에서 파일이 있으면 req에 파일 property 암시적 추가
     //jade에서 보낸 input file에 name을 적어줘야한다 upload.single('파일 name값');

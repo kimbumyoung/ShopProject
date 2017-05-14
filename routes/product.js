@@ -13,7 +13,6 @@ module.exports = function(conn){
             res.render('productRead',{rows:rows,color:color});
           }
       });
-
   });
 
   router.post('/cartAdd',function(req,res){
