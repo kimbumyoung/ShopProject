@@ -9,6 +9,7 @@ module.exports = function(conn){
     res.send('respond with a resource');
 
   });
+
   router.get('/cartList',function(req,res){
     var user_num = req.user.user_num;
     console.log("user_num : "+user_num);
@@ -18,7 +19,6 @@ module.exports = function(conn){
         res.render('cartList',{rows:rows});
     });
   });
-
   router.post('/cartAdd',function(req,res){
       conn.query(sql,cart,function(err,rows){
         if(err){
@@ -28,7 +28,6 @@ module.exports = function(conn){
         }
       });
   });
-
   router.get('/order',function(req,res){
       var user_num = req.user.user_num;
       console.log('order:'+user_num);

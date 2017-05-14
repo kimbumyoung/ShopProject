@@ -23,12 +23,56 @@ block content
       label.noticeReadTitle=rows[0].title
     hr(style={margin:'0px',border:'1px solid #f1f1f1'})
     .row
-      label DATE :
+      label.noticeTextColor DATE :
       label=noticedate
       br
-      label NAME :
+      label.noticeTextColor NAME :
       label=rows[0].writer
     hr(style={margin:'0px',border:'1px solid #f1f1f1'})
+    br
     .row 
-      label=noticeContent
+      textarea(id="content",name="content", rows="20",cols="180",style={width:'100%'} readonly)
+        =noticeContent
     hr(style={margin:'0px',border:'1px solid #f1f1f1'})
+    .row
+      label.noticeTextColor Reply
+      br
+      textarea(id="reply_content",name="reply_content", rows="4",cols="100",style={width:'100%'})
+      br   
+      button(id="replyBtn",style={width:'15%',margin:'0px',height:'40px',padding:'0px'}).btn.btn-default 등록
+      - if (typeof locals.session.username == 'undefined')
+        input(type='hidden',id='user_num', value='null')
+        input(type="hidden",id='displayname', value='null')
+      - else 
+        input(type='hidden',id='user_num', value='#{session.user_num}')
+        input(type="hidden",id='displayname', value='#{session.displayname}')
+    
+     input(type="hidden",id="noticeno",val=rows[0].noticeno)
+
+      
+    script.
+      $(document).ready(function(){
+          $('#replyBtn').click(function(event){
+          if($('#user_num').val()=='null'){
+            alert('로그인 필요');
+          }
+         else{
+              $.ajax({
+                 url:"/reply/register", 
+                 type:"post",
+                 data:{
+                    noticeno : $('#noticeno').val();
+                    reply_content : $('#reply_content').val();
+                    writername :  $('#displayname').val();
+                    user_num : $('#user_num').val();
+                 },
+                 dataType:"text",
+                success : function(result) {
+                console.log('success');
+                }});
+          }
+          });
+      
+      });
+          
+        

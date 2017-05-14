@@ -29,7 +29,7 @@ block content
       .col-sm-1.text-center(style={padding:'150px 0px'})
         label content 
       .col-sm-7
-        textarea(id="content",name="content", rows="3",cols="50",text="sssssss")
+        textarea(id="content",name="content", rows="20",cols="100",style={width:'100%'})
       .col-sm-2
     hr
     .row.text-center
@@ -39,26 +39,11 @@ block content
     form(method="post", action="/admin/noticeRegister",style={display:'none'})
         
         
-        
-        
-        
-        
-      
   script.
     $(document).ready(function(){
       
       $('button').click(function(event){
         $('form').append($('#content').clone());
-        //- console.log($('#content').val().replace(/\n/g,'<br>'));
-        //- content = content.replace("\r","@");
-        //- console.log(content);
-        //- $('form').append($('#title').clone().val($('#title').val().replaceAll("\r\n","<br>")));
-        //- var textareaEnter = $('#title').val().replace("\r\n", "<br>");
-        //- var b = $('#title').clone();
-        //- b.val(textareaEnter);
-        //여기서부터
-        
-        //- 
         $('form').append($('#title').clone());
         $('form').submit();
       });

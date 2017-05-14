@@ -1,4 +1,3 @@
-
 module.exports = function(app,conn){
   var express = require('express');
   var router = express.Router();
@@ -75,7 +74,6 @@ router.get('/noticeList',function(req,res){
       }
   });
   console.log('공지사항 읽기');
-
 });
 
 router.get('/noticeRegister',function(req,res){
@@ -109,7 +107,8 @@ router.get('/noticeRead',function(req,res){
       var noticedate;
       var date = new Date([rows[0].noticedate]);
       noticedate= date.toFormatString("yyyy-MM-dd");
-      var noticeContent =rows[0].content.replace("<s>"/g," ").replace("<e>","\n");
+      var noticeContent =rows[0].content.replace(/<s>/g," ").replace(/<e>/g,"\n");
+      console.log(noticeContent);
       res.render('noticeRead',{rows:rows,noticedate:noticedate,noticeContent:noticeContent});
     }
   });
