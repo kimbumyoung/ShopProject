@@ -73,7 +73,7 @@ block content
             | More Info 
             i.fa.fa-chevron-circle-right
       .col-lg-1
-  .row(style={padding :'30px 100px',overflow :'hidden'})
+  .row(style={padding :'30px 100px'})
     label 최근 구매자
     hr(style={border:'1px solid black'})
     .col-sm-2.text-center 
@@ -84,7 +84,7 @@ block content
       label 주문 메세지
     .col-sm-2.text-center 
       label 결제 금액
-    hr(style={border:'1px solid #b7b7b7'})
+    hr(style={border:'1px solid #b7b7b7',margin:'0px'})
     each list, i in latestList
       .row.orderlistRows(style={padding:'10px 0px',margin:'0px'}) 
         .col-sm-2.text-center 
@@ -108,21 +108,21 @@ block content
         .row(style={padding:'20px 30px'})  
           .row(style={padding:'10px 100px'})
             .col-sm-4
-              div.circle(style={background : '#10ea6e'})
+              div.circle
                 sapn.glyphicon.glyphicon-heart
                 br
                 label 입금확인중
                 br
                 label 17건
             .col-sm-4
-              div.circle(style={background : '#d10478'})
+              div.circle
                 sapn.glyphicon.glyphicon-heart
                 br
                 label 주문접수
                 br
                 lasbel 2건
             .col-sm-4
-              div.circle(style={background : '#058c8c'})
+              div.circle
                 sapn.glyphicon.glyphicon-heart
                 br
                 label 발주확인
@@ -130,21 +130,21 @@ block content
                 lasbel 2건
           .row(style={padding:'10px 100px'})
             .col-sm-4
-              div.circle(style={background : '#9123ba'})
+              div.circle
                 sapn.glyphicon.glyphicon-heart
                 br
                 label 출고처리
                 br
                 lasbel 2건
             .col-sm-4
-              div.circle(style={background : '#b59809'})
+              div.circle
                 sapn.glyphicon.glyphicon-heart
                 br
                 label 출고지연
                 br
                 lasbel 2건
             .col-sm-4
-              div.circle(style={background : '#1a23a5'})
+              div.circle
                 sapn.glyphicon.glyphicon-heart
                 br
                 label 출고완료
