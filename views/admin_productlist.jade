@@ -17,12 +17,12 @@ block content
                 =productList.price
       br
       br          
+      
       button(type="submit", id="submit" ) 판매 등록        
       
       script.
          $(document).ready(function(){
               var $form = $('<form></form>');
-                          
               $form.attr("method","post");                    
               $form.attr("action","/admin/productlist");     
               $form.appendTo('body');

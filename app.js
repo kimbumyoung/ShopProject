@@ -45,7 +45,7 @@ var users = require('./routes/users')(conn);
 var login = require('./routes/local_login')(hasher,conn,session,passport);
 var admin = require('./routes/admin')(app,conn);
 var product = require('./routes/product')(conn);
-
+var reply = require('./routes/reply')(conn);
 app.locals.pretty = true;//jade가 웹에서 html 코드가 보기좋게 된다.
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,11 +60,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/p',express.static('image'));
 
+
 app.use('/', index);
 app.use('/user', users);
 app.use('/local', login);
 app.use('/admin',admin);
 app.use('/product',product);
+app.use('/reply',reply);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -106,7 +106,7 @@ router.post('/noticeRegister',function(req,res){
 
 router.get('/noticeRead',function(req,res){
   var noticeno = req.param('noticeno');
-  var sql = 'select *from notice where noticeno = ?';
+  var sql = 'select * from notice n join notice_reply r on n.noticeno = r.noticeno and n.noticeno =?';
   conn.query(sql,[noticeno],function(err,rows){
     if(err){
       console.log(err);

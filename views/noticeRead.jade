@@ -24,7 +24,7 @@ block content
     hr(style={margin:'0px',border:'1px solid #f1f1f1'})
     .row
       label.noticeTextColor DATE :
-      label=noticedate
+      label=rows[0].noticedate
       br
       label.noticeTextColor NAME :
       label=rows[0].writer
@@ -34,6 +34,15 @@ block content
       textarea(id="content",name="content", rows="20",cols="180",style={width:'100%'} readonly)
         =noticeContent
     hr(style={margin:'0px',border:'1px solid #f1f1f1'})
+    .row(style={margin:'0px'})
+      each replyList, i in rows
+        .row 
+          .col-sm-3
+            label=replyList.writername
+          .col-sm-7
+            label=replyList.reply_content
+          .col-sm-2 
+            label=replyList.replydate
     .row
       label.noticeTextColor Reply
       br
@@ -45,9 +54,10 @@ block content
         input(type="hidden",id='displayname', value='null')
       - else 
         input(type='hidden',id='user_num', value='#{session.user_num}')
-        input(type="hidden",id='displayname', value='#{session.displayname}')
+        input(type="hidden",id='displayname', value='#{session.displayname}') 
     
-     input(type="hidden",id="noticeno",val=rows[0].noticeno)
+     input(type="hidden",id="noticeno",value=rows[0].noticeno)
+  
 
       
     script.
@@ -61,14 +71,14 @@ block content
                  url:"/reply/register", 
                  type:"post",
                  data:{
-                    noticeno : $('#noticeno').val();
-                    reply_content : $('#reply_content').val();
-                    writername :  $('#displayname').val();
-                    user_num : $('#user_num').val();
+                    noticeno : $('#noticeno').val(),
+                    reply_content : $('#reply_content').val(),
+                    writername :  $('#displayname').val(),
+                    user_num : $('#user_num').val()
                  },
-                 dataType:"text",
+                dataType:"text",
                 success : function(result) {
-                console.log('success');
+                  console.log(result);
                 }});
           }
           });

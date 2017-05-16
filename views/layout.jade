@@ -159,7 +159,77 @@ html
        .noticeTextColor {
           color : #9b9ea3;
        }
-  
+        .inner_box{overflow:hidden;height:478px;position:relative;}
+         
+        #footer {margin:60px auto 0;clear:both;  font-family: 'Lato', sans-serif; font-weight:normal; }
+         
+         #footer .inner{overflow:hidden;position:relative;width:1200px;height:453px;margin:0 auto;*zoom:1;}
+         
+
+        .inner_box .utilMenu { clear:both;overflow:hidden;height:43px;line-height:43px;*zoom:1;color:#969696;margin:0 0 44px;  border-top:1px solid #F3F3F3;  border-bottom:1px solid #F3F3F3;}
+         
+        .inner_box .utilMenu li { float:left;padding:0 10px 0 10px;font-size:10px; font-weight:none;text-transform:uppercase;letter-spacing:0.05em; border-right:0px #a5a5a5 dotted; }
+         
+        .inner_box .utilMenu li.home{padding-left:10px;background:none;}
+         
+        .inner_box .utilMenu li a {color:#999;  font-family: 'Lato', sans-serif; font-size:10px; }
+        .inner_box .utilMenu li a:hover {color:#000;  }
+         
+        .inner_box .utilMenu li.txt{float:right;text-transform:lowercase;background:none;}
+         
+        .inner_box .utilMenu li.txt span{text-decoration:underline;text-transform:uppercase;}
+         
+
+
+        .inner_box .customer {clear:both;overflow:hidden;height:180px;line-height:16px;*zoom:1;color:#626262;margin:0 0 44px;}
+         
+        .inner_box .customer li { float:left; border-right:1px #DADADA dotted;font-size:10px;letter-spacing:0.05em;  padding:10px; height:168px; width:275px; }
+         
+        .inner_box .customer li.cus01{ }
+         
+        .inner_box .customer li.cus01 .callno { font-size:12px;font-weight:bold;color:#333;letter-spacing:0.1em;margin-bottom:10px;}
+         
+        .inner_box .customer li.cus02 { font-size:11px;line-height:18px; font-family:'Nanum Gothic',돋움,Dotum;}
+         
+        .inner_box .customer li.cus02 .bankinfo{margin-bottom:0px; color:#333  }
+         
+        .inner_box .customer li.cus02 .b_txt {color:#999;}
+         
+        .inner_box .customer li.cus03 a {font-size:12px;  font-family: 'Lato', sans-serif; font-size:10px; }
+         
+
+
+        .inner_box .customer li.cus04 {width:275px; border-right:0px #a5a5a5 dotted;}
+         
+         
+        .inner_box .customer li h3 { color:#FFFFFF;font-family: 'Lato', sans-serif; font-weight:bold;  margin-bottom:23px;padding:0;width:275px;text-align:center;height:24px;line-height:24px;border:1 #353535 solid #353535; z-index:2;  background:#353535; solid;font-size:11px;}
+
+        .inner_box .customer li p {text-transform:uppercase;color:#626262; padding-left:10px;}
+         
+        .inner_box .customer li p a{text-transform:uppercase;color:#626262;}
+         
+        .inner_box .customer li p a:hover{color:#999;}
+         
+        .inner_box .customer li span{font-size:12px;color:#8f8f8f;margin-left:3px;}
+         
+        .inner_box .address {clear:both;overflow:hidden;padding:30px 0 0;border-top:1px #e5e5e5 solid;font-size:12px;color:#626262;line-height:25px; font-weight:normal;}
+         
+        .inner_box .address span{padding:0 25px 0 0;}
+
+        .inner_box .address span a{color:#626262;}
+
+         
+        .inner_box .address span.kor-font {font-size:12px;padding:0; font-family:'Nanum Gothic',돋움,Dotum;}
+         
+        .kor-font {font-size:11px;padding:0; font-family:'Nanum Gothic',돋움,Dotum;}
+
+
+        .inner_box .cus04 .info05 ul{ margin:0;width:275px; clear:both; }
+        .inner_box .cus04 .info05 li {width:84px !important; height:45px !important;padding:0;line-height:45px !important;float:left;margin:0 0 5px 5px; border:1px #ddd solid;}
+        .inner_box .cus04 .info05 li:hover{border:1px #2b2b2b solid; color:#333; }
+        .inner_box .cus04 .info05 li a{ display:block;text-align:center;text-transform:uppercase; color:#878787; line-height:45px !important; font-size:10px; font-family:Roboto,'Nanum Gothic',돋움,Dotum;font-weight:400 }
+
+        
   body
     #main_container.row
       #leftTap.col-sm-3
@@ -267,19 +337,99 @@ html
           | SAT.SUN.REDDAY OFF
         .row
           br
-          //- .sns  
-          //-     ul 
-          //-       li
-          //-         a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
-          //-           img(src="/images/kakao.png",style={width:'100%'})
-          //-       li
-          //-         a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
-          //-           img(src="/images/facebook.png",style={width:'100%'})
-          //-       li
-          //-         a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
-          //-           img(src="/images/twitter.png",style={width:'40%'})
-          //-     
+          .sns  
+              ul 
+                li
+                  a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
+                    img(src="/images/kakao.png",style={width:'100px',height:'50px'})
+                li(style ={padding:'5px 0px'})
+                  a(href='http://www.okun.co.kr/board/board.html?code=hehekuk_board5&type=v&num1=999978&num2=00000&lock=N&flag=notice')
+                    img(src="/images/twitter.png",style={width:'40px',height:'40px'})
+              
           
       .col-sm-3
       #rightTap.col-sm-9(style={padding:'0px 40px'})
         block content
+        .row 
+        #footer(style={width:'100%'})
+          .inner
+            .inner_box
+              ul.utilMenu
+                li.home
+                  a(href='/index.html') home
+                li
+                  a(href='javascript:bottom_privacy();')
+                    | PRIVACY POLICY 
+                    span.kor-font [개인정보처리방침]
+                li
+                  a(href='javascript:view_join_terms();') AGREEMENT
+                li
+                  a(href='/html/info.html') shopping guide
+              ul.customer
+                li.cus01
+                  h3 CS CENTER
+                  p.callno 010-7670-5549
+                  p open time / mon-fri ( pm01:00 - pm06:00 )
+                  p closed hour / sat. sun. holiday off
+                li.cus02
+                  h3 BANK INFO
+                  p 예금주 : 김범영(B'store')
+                  p.bankinfo 우리 1002-743-226987
+                  p.b_txt(style='margin-top:10px;') 입금자와 주문자명이 다를경우
+                  p.b_txt 입금확인이 지연될 수 있습니다
+                li.cus03
+                  h3 MEMBERS MENU
+                  p
+                    a(href='/shop/idinfo.html') NEW MEMBER JOIN (+ 25,000won)
+                  p
+                    a(href='/shop/mypage.html?mypage_type=mywishlist') WISH LIST
+                  p
+                    a(href='/shop/basket.html') SHOPPING CART
+                  p
+                    a(href='/shop/confirm_login.html?type=myorder') ORDER LIST
+                  p
+                    a(href='/shop/member.html?type=myreserve') MY POINT
+                li.cus04
+                  h3 BORDER MENU
+                  .info05
+                    ul
+                      li
+                        a(href='/board/board.html?code=hehekuk_board5') notice
+                      li
+                        a(href='/board/board.html?code=hehekuk_board1') q&a
+                      li
+                        a(href='/board/power_review.html') review
+                    ul
+                      li
+                        a(href='/board/board.html?code=hehekuk_image2') event
+                      li
+                        a(href='/shop/member.html?type=mynewmain') mypage
+                      li
+                        a(href='http://service.epost.go.kr/iservice/trace/Trace.jsp', target='_blank') delivery
+                  // #info05
+              p.address
+                span
+                  | company. 
+                  b B'store
+                span
+                  | owner. 
+                  span.kor-font 김범영
+                span tel. 010-7670-5549
+                span
+                  | privacy officer. 
+                  span.kor-font 김범영
+                span email. okunman@naver.com
+                br
+                span
+                  | business no. 355-04-00683  
+                  a(href='http://www.ftc.go.kr/info/bizinfo/communicationList.jsp', target='_blank') [사업자정보확인]
+                span mail order license. 제2017-성북구-0110호
+                br
+                span
+                  | address. 
+                  span.kor-font 서울특별시 성북구 성북동 2226 4층
+                br
+                span
+                  | copyright(c)  
+                  span B'Store
+                  |  all right reserved / design by wizdesign
