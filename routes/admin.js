@@ -107,16 +107,28 @@ router.post('/noticeRegister',function(req,res){
 router.get('/noticeRead',function(req,res){
   var noticeno = req.param('noticeno');
   var sql = 'select * from notice n join notice_reply r on n.noticeno = r.noticeno and n.noticeno =?';
+  var noticedate;
+  var noticeContent;
   conn.query(sql,[noticeno],function(err,rows){
     if(err){
       console.log(err);
     }else{
-      var noticedate;
-      var date = new Date([rows[0].noticedate]);
-      noticedate= date.toFormatString("yyyy-MM-dd");
-      var noticeContent =rows[0].content.replace(/<s>/g," ").replace(/<e>/g,"\n");
-      console.log(noticeContent);
-      res.render('noticeRead',{rows:rows,noticedate:noticedate,noticeContent:noticeContent});
+      if(rows[0]){
+        var date = new Date([rows[0].noticedate]);
+        noticedate= date.toFormatString("yyyy-MM-dd");
+        noticeContent =rows[0].content.replace(/<s>/g," ").replace(/<e>/g,"\n");
+        res.render('noticeRead',{rows:rows,noticedate:noticedate,noticeContent:noticeContent});
+      }
+      else{
+        var sql = 'select *from notice where noticeno = ?';
+        conn.query(sql,[noticeno],function(err,rows){
+          var date = new Date([rows[0].noticedate]);
+          noticedate= date.toFormatString("yyyy-MM-dd");
+          noticeContent =rows[0].content.replace(/<s>/g," ").replace(/<e>/g,"\n");
+          res.render('noticeRead',{rows:rows,noticedate:noticedate,noticeContent:noticeContent});
+        });
+      }
+
     }
   });
 });

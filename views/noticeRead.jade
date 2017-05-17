@@ -33,18 +33,26 @@ block content
     .row 
       textarea(id="content",name="content", rows="20",cols="180",style={width:'100%'} readonly)
         =noticeContent
+    br
     hr(style={margin:'0px',border:'1px solid #f1f1f1'})
-    .row(style={margin:'0px'})
-      each replyList, i in rows
-        .row 
-          .col-sm-3
-            label=replyList.writername
-          .col-sm-7
-            label=replyList.reply_content
-          .col-sm-2 
-            label=replyList.replydate
-    .row
+    br
+      
+    .row(id='replyBody',style={margin:'0px'})
       label.noticeTextColor Reply
+      br
+      br
+      - if(rows[0].reply_content)
+        each replyList, i in rows
+          .row.replyContent
+            .col-sm-3
+              label=replyList.writername
+            .col-sm-7
+              label |
+              label=replyList.reply_content
+            .col-sm-2 
+              label 2017/05/20
+    .row
+      label.noticeTextColor Reply Register
       br
       textarea(id="reply_content",name="reply_content", rows="4",cols="100",style={width:'100%'})
       br   
@@ -78,7 +86,9 @@ block content
                  },
                 dataType:"text",
                 success : function(result) {
-                  console.log(result);
+                  var obj = eval("("+result+")");
+                  
+                  $('#replyBody').append('<div class="row replyContent"><div class="col-sm-3"><label>'+obj.writername+'</label></div><div class="col-sm-7"><label>|</label><label>'+obj.reply_content+'</label></div><div class="col-sm-2"><label>2017/05/20</label></div></div>');
                 }});
           }
           });

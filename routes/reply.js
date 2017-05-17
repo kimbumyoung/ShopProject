@@ -10,17 +10,16 @@ module.exports = function(conn){
       writername :  req.body.writername,
       user_num : req.body.user_num,
     };
-
-    console.log(reply);
-    console.dir(reply);
     var sql = 'insert into notice_reply set ?';
-    conn.query(sql,reply,function(err,rows){
+    var query =  conn.query(sql,reply,function(err,rows){
       if(err){
         console.log(err);
       }else{
-          console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-          console.log(rows);
-          res.send(rows);
+        result = {
+          writername : query.values.writername,
+          reply_content : query.values.reply_content
+        }
+        res.send(result);
       }
     });
 
