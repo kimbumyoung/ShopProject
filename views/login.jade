@@ -37,11 +37,18 @@ block content
             .col-sm-6
               .row
                 label -회원가입을 하시면 더 많은 혜택을 받으실 수 있습니다.
-                button(type="submit",style={width:'100%',height:'40px',background:'black',color:'white'}).btn.btn-default JOIN US
+                a(href="/local/signUp")
+                  div(style={width:'100%',height:'40px',background:'black',color:'white',padding:'10px 0px'}).text-center
+                      label Join Us
               br
               .row
                 label -아이디 또는 비밀번호를 잊어버렸나요!
                 button(type="submit",style={width:'100%',height:'40px',background:'black',color:'white'}).btn.btn-default ID/PW SEARCH
               
         .col-sm-2
-          
+      
+    //- script.
+    //-    $(document).ready(function(){
+    //-       
+    //-        
+    //-     });

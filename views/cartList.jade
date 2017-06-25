@@ -68,14 +68,14 @@ block content
     .col-sm-8
     .col-sm-4
       label 총 구매 금액:
-      label 0원
+      label=totalPrice
       label + 배송료 2,500원 = 
-      label 2500원
+      label 258400원
   hr(style={border:'2px solid gray'})
   br
   br    
   .row.text-center
-    label 100,000원 미만의 주문은 배송료를 청구합니다.    
+    label B'store 매장은 배송료 2500원을 청구합니다.    
   br
   br
   .row.text-center
@@ -85,3 +85,9 @@ block content
   br
   br
   br
+    
+script.
+   $(document).ready(function(){
+          console.log("ssssssss");
+       });
+    

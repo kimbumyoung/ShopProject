@@ -16,7 +16,11 @@ module.exports = function(conn){
     var sql = 'SELECT c.cartno,c.user_num,c.pboardno,c.size,c.color,c.productcount,c.price,p.mainimage,p.productname FROM cart c join product_board b join products p where c.user_num = ? and c.pboardno = b.pboardno and b.pno = p.pno';
     conn.query(sql,[user_num],function(err,rows){
       console.log(rows);
-        res.render('cartList',{rows:rows});
+      var totalPrice=0;
+      for (var i = 0; i< rows.length; i++) {
+        totalPrice+=rows[i].price;
+      }
+        res.render('cartList',{rows:rows,totalPrice:totalPrice});
     });
   });
   router.post('/cartAdd',function(req,res){
